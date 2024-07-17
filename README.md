@@ -35,7 +35,7 @@ Insert a container `iframe` into your page where you want the `Web App` displaye
 
 The following 3 steps needs to be implemented to get the target URL of the iframe and provide the necessary access token for the Web App.
 
-Simple 3 steps:
+3 simple steps:
 1. [Generate an authorization code](#generate-an-authorization-code)
 2. [Authorization](#authorization)
 3. [Set the source of the container iframe](#set-the-source-of-the-container-iframe)
@@ -102,6 +102,8 @@ clientId=${clientId}
 &rediectUri=https://frame.webapp.class2.xund.solutions
 `
 ```
+
+> Note that `state` parameter has to be a valid UUID
 
 Whenever a user completes a check and gets the report, the webhook makes a POST request to your backend endpoint with the following body content where the state is your custom client ID you passed to both auth and token requests at the beginning:
 

@@ -19,13 +19,13 @@
 
   const directCheck = `HEALTH_CHECK`  // start with `HEALTH_CHECK`, `ILLNESS_CHECK` or `SYMPTOM_CHECK` directly
 
-  const birth = '1970-12-31'          // start check with birth date already chosen
+  const birth = '1970-12-31'          // start check with birthdate already chosen
   const gender = 'female'             // start check with gender already chosen
 
   const authCode = crypto.randomUUID?.() ?? crypto.getRandomValues(new Uint32Array(40)).join('')
 
   const authorizeRequestUrl = new URL(`${XUND_AUTH_BASE_URL}/authorize`)
-  appendSearchParamsIfSet(authorizeRequestUrl, { clientId, authCode, state })
+  appendSearchParamsIfSet(authorizeRequestUrl, { clientId, authCode, state, scope: 'state' })
 
   await fetch(authorizeRequestUrl)
 

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%">
+  <head>
+    <title>My Website</title>
+  </head>
+  <body>
+    <h1>My Website Title</h1>
+
+    <iframe
+      allow="geolocation"
+      id="xund-iframe"
+      style="width: 100vw; height: 100vh; border: none"
+      title="Web App Frame"
+    />
+    <script>
+      // edit
+      const XUND_CLIENT_ID = 'zzzzzzzz-zzzz-zzzz-zzzz-zzzzzzzzzzzz';
+      const XUND_WEBAPP_CODE = 'yyyyyyyy-yyyy-yyyy-yyyy-yyyyyyyyyyyy';
+
+      // do not touch
+      const authCode = crypto.randomUUID?.() ?? crypto.getRandomValues(new Uint32Array(40)).join('')
+      const redirectUri = encodeURIComponent('https://frame.webapp.class2.xund.solutions/' + XUND_WEBAPP_CODE)
+      await fetch(`https://identity-management.xund.solutions/api/authorize?clientId=${XUND_CLIENT_ID}&authCode=${authCode}`)
+      document.getElementById('xund-iframe').src = `https://identity-management.xund.solutions/api/token?clientId=${XUND_CLIENT_ID}&authCode=${authCode}&redirectUri=${redirectUri}`
+    </script>
+    
+  </body>
+</html>

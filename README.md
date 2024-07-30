@@ -87,10 +87,10 @@ clientId=${clientId}
 
 First, please turn on `Enable callback URL` option on the Client Hub [`API Key`](https://clienthub.xund.solutions/key) section and point it to an existing endpoint on your server. 
 
-Use the `state` URL parameter for passing your own custom client ID on both authorization request and redirectUri part of tokenRequestUrl:
+Use the `state` URL parameter along with `scope=state` for passing your own custom ID on authorization request. Please also append the state to the redirectUri part of tokenRequestUrl:
 
 ```http
-GET: https://login.xund.solutions/api/authorize?clientId=${clientId}&authCode=${authCode}&state=${yourCustomClientID}
+GET: https://login.xund.solutions/api/authorize?clientId=${clientId}&authCode=${authCode}&state=${yourCustomClientID}&scope=state
 ```
 
 ```javascript
@@ -144,4 +144,3 @@ document.getElementById('xund-iframe').src = `...&checkId=xxxxxxxx-xxxx-xxxx-xxx
 #
 
 > ⚠️ If you are still not sure how you could move forward with your implementation, please contact us. We're happy to assist you in your process!
-

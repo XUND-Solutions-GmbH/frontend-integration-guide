@@ -25,7 +25,7 @@
   const authCode = crypto.randomUUID?.() ?? crypto.getRandomValues(new Uint32Array(40)).join('')
 
   const authorizeRequestUrl = new URL(`${XUND_AUTH_BASE_URL}/authorize`)
-  appendSearchParamsIfSet(authorizeRequestUrl, { clientId, authCode, state })
+  appendSearchParamsIfSet(authorizeRequestUrl, { clientId, authCode, state, scope: 'state' })
 
   await fetch(authorizeRequestUrl)
 

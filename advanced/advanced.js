@@ -19,8 +19,8 @@
 
   const directCheck = `HEALTH_CHECK`  // start with `HEALTH_CHECK`, `ILLNESS_CHECK` or `SYMPTOM_CHECK` directly
 
-  const birth = '1970-12-31'          // start check with birthdate already chosen
-  const gender = 'female'             // start check with gender already chosen
+  const birth = '1970-12-31'          // start check with pre-filled birthdate
+  const gender = 'female'             // start check with pre-filled gender
 
   const authCode = crypto.randomUUID?.() ?? crypto.getRandomValues(new Uint32Array(40)).join('')
 

@@ -4,6 +4,8 @@ You can enable special features by adding more parameters to the redirectUri par
 
 ## Add profile data
 
+Start a check with pre-filled profile data
+
 ```javascript
 document.getElementById('xund-iframe').src = `...&gender=male&birth=2000-12-31`
 ```

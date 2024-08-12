@@ -13,11 +13,10 @@
       title="Web App Frame"
     />
     <script>
-      // edit
+
       const XUND_CLIENT_ID = 'zzzzzzzz-zzzz-zzzz-zzzz-zzzzzzzzzzzz';
       const XUND_WEBAPP_CODE = 'yyyyyyyy-yyyy-yyyy-yyyy-yyyyyyyyyyyy';
 
-      // do not touch
       const authCode = crypto.randomUUID?.() ?? crypto.getRandomValues(new Uint32Array(40)).join('')
       const redirectUri = encodeURIComponent('https://frame.webapp.class2.xund.solutions/' + XUND_WEBAPP_CODE)
       await fetch(`https://identity-management.xund.solutions/api/authorize?clientId=${XUND_CLIENT_ID}&authCode=${authCode}`)

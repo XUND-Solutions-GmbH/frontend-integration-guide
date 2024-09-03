@@ -1,46 +1,112 @@
 # XUND Web App Integration Guide
 
-`Web App` is a pre-made implementation of **[XUND APIs](https://xund-api-documentation.scrollhelp.site/xund-api-documentation/latest/general-information)** and it is ready for authorized clients to easily embed Symptom/Illness/Health Check into their website. The following guide is a step-by-step instruction of the authorization and embedding process and also provides examples for quick and easy implementation.
+XUND Web App is a pre-made implementation of **[XUND APIs](https://xund-api-documentation.scrollhelp.site/xund-api-documentation/latest/general-information)** and it is ready for authorized clients to easily embed Symptom/Illness/Health Check into their website. The following guide is a detailed instruction of embedding the XUND Web App and also provides examples for quick and easy implementation.
 
-This kind of integration doesn't require a deep understanding of our **[APIs](https://xund-api-documentation.scrollhelp.site/xund-api-documentation/latest/general-information)** and you can quickly provide a full-featured Illness Check / Symptom Check to your users. 
+##### Table of Contents  
+[Prerequisites](#prerequisites)  
+[Keys and IDs](#keys-and-ids)  
+[Quick try out](#quick-try-out)  
+[Recommended / secure embedding](#recommended-secure-embedding)  
+[Advanced options](#advanced-options)  
+
 
 ## Prerequisites
 
 1. You need to have access to [Client Hub](https://clienthub.xund.solutions/)
-2. Get a `XUND_CLIENT_ID` from [here](https://clienthub.beta.xund.solutions/key) and `XUND_WEBAPP_CODE` from [here](https://clienthub.beta.xund.solutions/webApp). <sup>👉 [View screenshot 1](readme-assets//clienthub-webapp-getcode.png), 👉 [View screenshot 2](readme-assets/clienthub-apikey-getkey.png)</sup>
-3. Make sure that `Frontend` is selected as the `Authentication Method` in the [API Key](https://clienthub.beta.xund.solutions/key/). <sup>👉 [View screenshot](readme-assets/clienthub-apikey-frontend.png)</sup>
-4. You can only embed `Web App` on the page with the exact `origin` defined in the [API Key](https://clienthub.beta.xund.solutions/key/). <sup>👉 [View screenshot](readme-assets/clienthub-apikey-origin.png)</sup>
-5. You need to have at least the following scopes set in the [API Key](https://clienthub.beta.xund.solutions/key/) section of [Client Hub](https://clienthub.xund.solutions/). <sup>👉 [View screenshot](readme-assets/clienthub-apikey-scopes.png)</sup> 
+2. You can embed Web App on the page **only** with the exact origin defined in the [API Key](https://clienthub.xund.solutions/key/). [`📷`](readme-assets/clienthub-apikey-origin.png)
+3. You need to have at least the following scopes set in the [API Key](https://clienthub.xund.solutions/key/) section of [Client Hub](https://clienthub.xund.solutions/). [`📷`](readme-assets/clienthub-apikey-scopes.png) 
 * `Web App`, 
 * at least `Illness Checks`, `Symptom Checks` or `Health Checks`
-6. Optionally you can customize your embedded app's look and feel and its other properties [here](https://clienthub.beta.xund.solutions/webApp/). <sup>👉 [View screenshot](readme-assets/clienthub-webapp-customize.png)</sup>
+4. Optionally you can customize your embedded app's look and feel and its other properties [here](https://clienthub.xund.solutions/webApp/). [`📷`](readme-assets/clienthub-webapp-customize.png)
 
-## Embedding XUND into your page
+## Keys and IDs
+
+| Name | Property Name | Description | Where to find? |
+| - | ---- | - | - |
+| Client ID | `client-id` | It's the unique identifier <br />of your organisation | Go to Client Hub and select <br />_API key_ from the left navigation <br />Scroll down for _Client ID_ [`📷`](readme-assets/clienthub-webapp-getcode.png) |
+| Web App Code | `webapp-code` | Any number of Web Apps <br />can be defined. Every app <br />has its own settings (e.g. <br />Custom colors) | Go to Client Hub and select <br />_WebApp_ from the left navigation <br />Scroll down for _Code_ [`📷`](readme-assets/clienthub-apikey-getkey.png) |
+| Auth Code | `auth-code` | In order to authenticatate <br />the Check session it's <br />necessary to have a valid Auth Code | If you have Frontent Authentication <br />enabled on Client Hub you'll get one <br />behind the scenes. Otherwise you <br />can get it during the Backend <br />Authentication |
+
+## _Quick_: Try out
+
+This kind of integration doesn't require a deep understanding of our **[APIs](https://xund-api-documentation.scrollhelp.site/xund-api-documentation/latest/general-information)** and you can quickly provide a full-featured Illness Check / Symptom Check to your users. 
+
+> Make sure that _Frontend_ is selected as the _Authentication Method_ in the [API Key](https://clienthub.xund.solutions/key/) section of Client Hub. [`📷`](readme-assets/clienthub-apikey-frontend.png)
+
+We recommend however to keep option disabled and have the authentication implemented on your own server [as described here](https://github.com/XUND-Solutions-GmbH/backend-auth-flow-demo/) to keep the Checks as secure as possible. 
+
+Please insert the following snippet into the body of your HTML page where you want to have XUND Web App placed:
 ```html
-<iframe
-    allow="geolocation"
-    id="xund-iframe"
-    style="width: 100vw; height: 100vh; border: none"
-    title="Web App Frame"
-/>
-<script>
-    
-    const XUND_CLIENT_ID = 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx';
-    const XUND_WEBAPP_CODE = 'yyyyyyyy-yyyy-yyyy-yyyy-yyyyyyyyyyyy';
-    
-    const authCode = crypto.randomUUID?.() ?? crypto.getRandomValues(new Uint32Array(40)).join('')
-    const redirectUri = encodeURIComponent('https://frame.webapp.class2.xund.solutions/' + XUND_WEBAPP_CODE)
-    await fetch(`https://identity-management.xund.solutions/api/authorize?clientId=${XUND_CLIENT_ID}&authCode=${authCode}`)
-    document.getElementById('xund-iframe').src = `https://identity-management.xund.solutions/api/token?clientId=${XUND_CLIENT_ID}&authCode=${authCode}&redirectUri=${redirectUri}`
-</script>
+<div id="your-container" style="width: 100vw; height: 100vh;">
+  <script 
+    src="https://webapp.xund.solutions/embed.js" 
+    client-id="***" 
+  />
+</div>
 ```
 
-## More examples:
+[Where do I get this value?](#keys-and-ids)
 
-* 👉 [Enable extra features](extra-features.md)
-* 👉 [Setup a webhook with your custom Client IDs](webhook.md)
-* 👉 [Advanced integration example](advanced/advanced.js)
+## _Recommended_: Secure embedding
 
+We encourage our partners to use our [Backend Authentication Method](https://github.com/XUND-Solutions-GmbH/backend-auth-flow-demo/) and provide the resulting authCode to the embbedding snippet: 
 
+```html
+<script 
+  src="https://webapp.xund.solutions/embed.js" 
+  client-id="***" 
+  auth-code="***" 
+/>
+```
+
+[Where do I get these values?](#keys-and-ids)
+
+Learn more about using Backend Authentication with Web App embeds in this [**Next JS example project**](nextjs-example) or visit our [**Backend Authentication Flow Demo**](https://github.com/XUND-Solutions-GmbH/backend-auth-flow-demo/) repository. 
+
+## Advanced options
+
+### Using a specific Web App instance
+
+In [Client Hub](https://clienthub.xund.solutions/) you can define different Web App instances. Each Web App can have its own settings. Extend the properties of the script with `webapp-code`:
+
+```html
+<script ... webapp-code="***" />
+```
+
+[Where do I get this value?](#keys-and-ids)
+
+### Add profile data
+
+If you want to launch the app with pre-defined profile data add these extra properties to the script tag: 
+
+```html
+<script ... gender="female" birth='2000-12-31" />
+```
+
+### Start with
+If this is set, the welcome page is not visible on check restart. Possible values: HEALTH_CHECK, ILLNESS_CHECK, SYMPTOM_CHECK
+
+```html
+<script ... directCheck="ILLNESS_CHECK" />
+```
+
+### Setup a webhook passing your custom ID after each check
+
+First, please turn on _Enable callback URL_ option on the Client Hub [API Key](https://clienthub.xund.solutions/key) section and point it to an existing endpoint on your server.
+
+Extend the script's properties with `state`:
+
+```html
+<script ... state="YOUR-CUSTOM-ID" />
+```
+
+On your defined endpoint you'll receive a message like this: 
+
+```json
+{"checkId":"***", "state":"YOUR-CUSTOM-ID"}
+```
+
+##
 
 > ⚠️ If you are still not sure how you could move forward with your implementation, please contact us. We're happy to assist you in your process!
+

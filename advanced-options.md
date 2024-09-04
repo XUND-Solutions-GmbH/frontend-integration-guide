@@ -33,7 +33,7 @@ If you want to launch the app with pre-defined profile data add these extra prop
 If this is set, the welcome page is not visible on check restart. Possible values: HEALTH_CHECK, ILLNESS_CHECK, SYMPTOM_CHECK
 
 ```html
-<script ... directCheck="ILLNESS_CHECK" />
+<script ... direct-check="ILLNESS_CHECK" />
 ```
 
 ### Setup a webhook passing your custom ID after each check

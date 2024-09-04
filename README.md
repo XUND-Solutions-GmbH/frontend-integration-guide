@@ -61,7 +61,7 @@ We encourage our partners to use our [Backend Authentication Method](https://git
 
 [Where do I get these values?](#keys-and-ids)
 
-Learn more about using Backend Authentication with Web App embeds in this [**Next JS example project**](nextjs-example) or visit our [**Backend Authentication Flow Demo**](https://github.com/XUND-Solutions-GmbH/backend-auth-flow-demo/) repository. 
+Learn more about using Backend Authentication with Web App embeds in this [**Next JS example project**](nextjs-example/src/app) or visit our [**Backend Authentication Flow Demo**](https://github.com/XUND-Solutions-GmbH/backend-auth-flow-demo/) repository. 
 
 ## Advanced options
 

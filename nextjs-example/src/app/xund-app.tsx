@@ -31,7 +31,7 @@ export const XUND = (props:XUNDProps) => {
     }
   }
 
-  const authorize = useCallback(async() => {
+  const setWebAppURL = useCallback(async() => {
     const clientId = props['client-id'] ?? process.env.XUND_AUTH_CLIENT_ID
     const webappCode = props['webapp-code'] ?? ''
 
@@ -83,12 +83,15 @@ export const XUND = (props:XUNDProps) => {
   useEffect(() => {
     if(!initialized.current) {
       
-      authorize()
-      replyOriginProof()
+      setWebAppURL()
+
+      if(authType === authKeys.FE) {
+        replyOriginProof()
+      }
       
       initialized.current = true
     }
-  }, [authorize])
+  }, [authType, setWebAppURL])
 
   return <iframe ref={ref} allow="geolocation" style={{width: '100%', height: '100%', border: 'none' }} title="XUND Application Frame"/>
 }

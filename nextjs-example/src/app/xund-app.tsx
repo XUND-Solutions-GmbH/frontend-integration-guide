@@ -8,16 +8,22 @@ interface XUNDProps {
 	"token"?: string,
 
 	"state"?: string,
-	"direct-check"?: string,
+	"direct-check"?: 'HEALTH_CHECK' | 'ILLNESS_CHECK' | 'SYMPTOM_CHECK',
 	"check-id"?: string,
 	"birth"?: string,
-	"gender"?: string,
+	"gender"?: 'male' | 'female',
+}
+
+export const authKeys = {
+  BE: 0,
+  FE: 1,
 }
 
 export const XUND = (props:XUNDProps) => {
 
 	const ref = useRef(null)
 	const initialized = useRef(false)
+  const authType = !!props.token ? authKeys.BE : authKeys.FE
 
 	const appendSearchParamsIfSet = (url:URL, searchParams:{[key:string]:string|null|undefined}) => {
     for (const [name, value] of Object.entries(searchParams)) {
@@ -28,13 +34,13 @@ export const XUND = (props:XUNDProps) => {
 
 	const authorize = useCallback(async() => {
 		const clientId = props['client-id'] ?? process.env.XUND_AUTH_CLIENT_ID
-		
-		const authCode = crypto.randomUUID?.() ?? crypto.getRandomValues(new Uint32Array(40)).join('')
 		const webappCode = props['webapp-code'] ?? ''
 
-		const state = props['state'] ?? ''
+    const urlParams = new URLSearchParams(document.location.search)
+		const state = props['state'] || urlParams.get('state') || ''
+		const authCode = crypto.randomUUID?.() ?? crypto.getRandomValues(new Uint32Array(40)).join('')
 		
-		if(!props.token) {
+		if(authType === authKeys.FE) { 
       const authorizeRequestUrl = new URL(`${process.env.XUND_AUTH_BASE_URL}/authorize`)
       appendSearchParamsIfSet(authorizeRequestUrl, { clientId, authCode, state, scope: 'state' })
       await fetch(authorizeRequestUrl)
@@ -44,9 +50,6 @@ export const XUND = (props:XUNDProps) => {
 
 			const iframeNode:HTMLIFrameElement = ref.current
 
-			const urlParams = new URLSearchParams(document.location.search)
-
-			const state = props['state'] || urlParams.get('state');
 			const checkId = props['check-id'] || urlParams.get('checkId');
 			const directCheck = props['direct-check'] || urlParams.get('directCheck');
 			const birth = props['birth'] || urlParams.get('birth');
@@ -55,22 +58,18 @@ export const XUND = (props:XUNDProps) => {
 			const webappUrl = new URL(`${process.env.XUND_APP_BASE_URL}/${webappCode}`)
     	appendSearchParamsIfSet(webappUrl, { birth, gender, checkId, state, directCheck })
 			
-			iframeNode.src = props.token ? 
-      `
-        ${process.env.XUND_APP_BASE_URL}/${webappCode}#${props.token}
-      `
-      :
-      `
-        ${process.env.XUND_AUTH_BASE_URL}/token
+			iframeNode.src = authType === authKeys.BE ? 
+        `${webappUrl}#${props.token}`
+        :
+        `${process.env.XUND_AUTH_BASE_URL}/token
         ?clientId=${clientId}
         &authCode=${authCode}
         &state=${state}
         &redirectUri=${encodeURIComponent(
           webappUrl.toString(),
-        )}
-      `
+        )}`
 		}
-	}, [props])
+	}, [authType, props])
 	
 	const replyOriginProof = () => {
 		window.addEventListener( "message", (event) => {
@@ -90,7 +89,7 @@ export const XUND = (props:XUNDProps) => {
 			
 			initialized.current = true
 		}
-	},[authorize])
+	}, [authorize])
 
 	return <iframe ref={ref} allow="geolocation" style={{width: '100%', height: '100%', border: 'none' }} title="XUND Application Frame"/>
 }

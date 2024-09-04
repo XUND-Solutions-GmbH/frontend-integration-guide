@@ -2,22 +2,27 @@ import { XUND } from "./xund-app"
 
 export default async function Home() {
 
-  const getAuthParams = async (name: string, path: string) =>{
-    const url = `${process.env.XUND_AUTH_BASE_URL}${path}`;
-    const res = await fetch(url)
-    const resJson = await res.json()
-    return resJson[name]
-  }
 
-  const authCode = await getAuthParams(
-    `authCode`, 
-    `/authorize?clientId=${process.env.XUND_AUTH_CLIENT_ID}`
-  )
+  const clientCredentials = {
+    clientId: process.env.XUND_AUTH_CLIENT_ID,
+    clientSecret: process.env.XUND_AUTH_CLIENT_SECRET,
+    grant_type: 'client_credentials',
+    scope: 'state' 
+  }
   
-  const token = await getAuthParams(
-    `token`, 
-    `/token?clientId=${process.env.XUND_AUTH_CLIENT_ID}&authCode=${authCode}`
+  const tokenRequest = await fetch(
+    `${process.env.XUND_AUTH_BASE_URL}/token`, 
+    {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(clientCredentials)
+    }  
   );
+  const tokenRequestJson = await tokenRequest.json()
+  const { access_token } = tokenRequestJson
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
@@ -31,7 +36,7 @@ export default async function Home() {
       </div>
 
       <div style={{width: '100vw', height: '100vh'}}>
-        <XUND client-id={process.env.XUND_AUTH_CLIENT_ID} webapp-code={process.env.XUND_WEBAPP_CODE} token={token} />
+        <XUND client-id={process.env.XUND_AUTH_CLIENT_ID} webapp-code={process.env.XUND_WEBAPP_CODE} token={access_token} />
       </div>
 
       <div className="mb-32 mt-16 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">

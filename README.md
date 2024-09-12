@@ -25,7 +25,7 @@ XUND Web App is a pre-made implementation of **[XUND APIs](https://xund-api-docu
 | - | ---- | - | - |
 | Client ID | `client-id` | It's the unique identifier <br />of your organisation | Go to Client Hub and select <br />_API key_ from the left navigation <br />Scroll down for _Client ID_ [`📷`](readme-assets/clienthub-webapp-getcode.png) |
 | Web App Code | `webapp-code` | Any number of Web Apps <br />can be defined. Every app <br />has its own settings (e.g. <br />Custom colors) | Go to Client Hub and select <br />_WebApp_ from the left navigation <br />Scroll down for _Code_ [`📷`](readme-assets/clienthub-apikey-getkey.png) |
-| Auth Code | `auth-code` | In order to authenticatate <br />the Check session it's <br />necessary to have a valid Auth Code | If you have Frontent Authentication <br />enabled on Client Hub you'll get one <br />behind the scenes. Otherwise you <br />can get it during the Backend <br />Authentication |
+| Auth Code | `auth-code` | In order to authenticatate <br />the Check session it's <br />necessary to have a valid Auth Code | If you have Frontent Authentication <br />enabled on Client Hub you'll get <br />one behind the scenes. Otherwise <br />you can get it during the Backend <br />Authentication |
 
 ## _Quick_: Try out
 

@@ -33,7 +33,7 @@ This kind of integration doesn't require a deep understanding of our **[APIs](ht
 
 > Make sure that _Frontend_ is selected as the _Authentication Method_ in the [API Key](https://clienthub.xund.solutions/key/) section of Client Hub. [`📷`](readme-assets/clienthub-apikey-frontend.png)
 
-We recommend however to keep option disabled and have the authentication implemented on your own server [as described here](https://github.com/XUND-Solutions-GmbH/backend-auth-flow-demo/) to keep the Checks as secure as possible. 
+We recommend however to keep this option disabled and have the authentication implemented on your own server [as described here](https://github.com/XUND-Solutions-GmbH/backend-auth-flow-demo/) to ensure the maximum security of the Checks. 
 
 Please insert the following snippet into the body of your HTML page where you want to have XUND Web App placed:
 ```html
@@ -45,7 +45,7 @@ Please insert the following snippet into the body of your HTML page where you wa
 </div>
 ```
 
-[Where do I get this value?](#keys-and-ids)
+[Where do I get `client-id`?](#keys-and-ids)
 
 ## _Recommended_: Secure embedding
 
@@ -59,15 +59,15 @@ We encourage our partners to use our [Backend Authentication Method](https://git
 />
 ```
 
-[Where do I get these values?](#keys-and-ids)
+[Where do I get `client-id` and `auth-code`?](#keys-and-ids)
 
 Learn more about using Backend Authentication with Web App embeds in this [**Next JS example project**](nextjs-example/src/app) or visit our [**Backend Authentication Flow Demo**](https://github.com/XUND-Solutions-GmbH/backend-auth-flow-demo/) repository. 
 
 ## Advanced options
 
 [Using a specific Web App instance](advanced-options.md#using-a-specific-web-app-instance)  
-[Add profile data](advanced-options.md#add-profile-data)  
-[Start with](advanced-options.md#start-with)  
+[Start with Symptom, Illness or Health Check directly](advanced-options.md#start-with)  
+[Start Check with pre-defined profile data](advanced-options.md#add-profile-data)  
 [Setup a webhook passing your custom ID after each check](advanced-options.md#setup-a-webhook-passing-your-custom-id-after-each-check)  
 
 

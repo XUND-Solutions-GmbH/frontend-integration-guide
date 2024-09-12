@@ -5,7 +5,7 @@ import { useCallback, useEffect, useRef } from 'react';
 interface XUNDProps {
   "client-id": string | undefined,
   "webapp-code"?: string,
-  "token"?: string,
+  "auth-code"?: string,
 
   "state"?: string,
   "direct-check"?: 'HEALTH_CHECK' | 'ILLNESS_CHECK' | 'SYMPTOM_CHECK',
@@ -14,16 +14,12 @@ interface XUNDProps {
   "gender"?: 'male' | 'female',
 }
 
-export const authKeys = {
-  BE: 0,
-  FE: 1,
-}
+
 
 export const XUND = (props:XUNDProps) => {
 
   const ref = useRef(null)
   const initialized = useRef(false)
-  const authType = !!props.token ? authKeys.BE : authKeys.FE
 
   const appendSearchParamsIfSet = (url:URL, searchParams:{[key:string]:string|null|undefined}) => {
     for (const [name, value] of Object.entries(searchParams)) {
@@ -39,7 +35,7 @@ export const XUND = (props:XUNDProps) => {
     const state = props['state'] || urlParams.get('state') || ''
     const authCode = crypto.randomUUID?.() ?? crypto.getRandomValues(new Uint32Array(40)).join('')
     
-    if(authType === authKeys.FE) { 
+    if(!props['auth-code']) { 
       const authorizeRequestUrl = new URL(`${process.env.XUND_AUTH_BASE_URL}/authorize`)
       appendSearchParamsIfSet(authorizeRequestUrl, { clientId, authCode, state, scope: 'state' })
       await fetch(authorizeRequestUrl)
@@ -57,18 +53,9 @@ export const XUND = (props:XUNDProps) => {
       const webappUrl = new URL(`${process.env.XUND_APP_BASE_URL}/${webappCode}`)
       appendSearchParamsIfSet(webappUrl, { birth, gender, checkId, state, directCheck })
       
-      iframeNode.src = authType === authKeys.BE ? 
-        `${webappUrl}#${props.token}`
-        :
-        `${process.env.XUND_AUTH_BASE_URL}/token
-        ?clientId=${clientId}
-        &authCode=${authCode}
-        &state=${state}
-        &redirectUri=${encodeURIComponent(
-          webappUrl.toString(),
-        )}`
+      iframeNode.src = `${webappUrl}?clientId=${clientId}&authCode=${authCode}`;
     }
-  }, [authType, props])
+  }, [props])
   
   const replyOriginProof = () => {
     window.addEventListener( "message", (event) => {
@@ -85,13 +72,13 @@ export const XUND = (props:XUNDProps) => {
       
       setWebAppURL()
 
-      if(authType === authKeys.FE) {
+      if(!props['auth-code']) {
         replyOriginProof()
       }
       
       initialized.current = true
     }
-  }, [authType, setWebAppURL])
+  }, [props, setWebAppURL])
 
   return <iframe ref={ref} allow="geolocation" style={{width: '100%', height: '100%', border: 'none' }} title="XUND Application Frame"/>
 }

@@ -1,28 +1,29 @@
 import { XUND } from "./xund-app"
+import { createHmac } from 'crypto'
 
 export default async function Home() {
 
-
-  const clientCredentials = {
-    clientId: process.env.XUND_AUTH_CLIENT_ID,
-    clientSecret: process.env.XUND_AUTH_CLIENT_SECRET,
-    grant_type: 'client_credentials',
-    scope: 'state' 
-  }
+  const state = crypto.randomUUID?.() ?? crypto.getRandomValues(new Uint32Array(40)).join('')
   
-  const tokenRequest = await fetch(
-    `${process.env.XUND_AUTH_BASE_URL}/token`, 
-    {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json, text/plain, */*',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(clientCredentials)
-    }  
+  const hasher = createHmac('sha256', process.env.XUND_AUTH_CLIENT_SECRET ?? '')
+  hasher.update(`${state}${process.env.XUND_AUTH_CLIENT_ID}`)
+  const secretHash = hasher.digest('hex')
+
+  const authorizePayload = {
+    clientId: process.env.XUND_AUTH_CLIENT_ID,
+    secretHash,
+    state,
+  }
+
+  const authorizeResponse = await fetch(
+    `${process.env.XUND_AUTH_BASE_URL}/authorize?clientId=${process.env.XUND_AUTH_CLIENT_ID}&secretHash=${secretHash}&state=${state}`, 
   );
-  const tokenRequestJson = await tokenRequest.json()
-  const { access_token } = tokenRequestJson
+
+  const {authCode} = authorizeResponseJson
+
+  console.log({authorizeResponse});
+
+
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
@@ -36,7 +37,7 @@ export default async function Home() {
       </div>
 
       <div style={{width: '100vw', height: '100vh'}}>
-        <XUND client-id={process.env.XUND_AUTH_CLIENT_ID} webapp-code={process.env.XUND_WEBAPP_CODE} token={access_token} />
+        <XUND client-id={process.env.XUND_AUTH_CLIENT_ID} webapp-code={process.env.XUND_WEBAPP_CODE} auth-code={authCode} />
       </div>
 
       <div className="mb-32 mt-16 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">

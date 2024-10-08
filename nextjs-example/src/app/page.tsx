@@ -1,4 +1,4 @@
-import { XUND } from "./xund-app"
+import Script from "next/script"
 import { createHmac } from 'crypto'
 
 export default async function Home() {
@@ -9,21 +9,34 @@ export default async function Home() {
   hasher.update(`${state}${process.env.XUND_AUTH_CLIENT_ID}`)
   const secretHash = hasher.digest('hex')
 
-  const authorizePayload = {
-    clientId: process.env.XUND_AUTH_CLIENT_ID,
-    secretHash,
-    state,
-  }
-
   const authorizeResponse = await fetch(
     `${process.env.XUND_AUTH_BASE_URL}/authorize?clientId=${process.env.XUND_AUTH_CLIENT_ID}&secretHash=${secretHash}&state=${state}`, 
   );
 
+  if (!authorizeResponse.ok) {
+    throw new Error(`${authorizeResponse.status} ${JSON.stringify(authorizeResponseJson)}`)
+  }
+
+  const authorizeResponseJson = await authorizeResponse.json()
+
   const {authCode} = authorizeResponseJson
+  console.log({authCode});
+  
 
-  console.log({authorizeResponse});
-
-
+  type XUNDContainerProps = React.ComponentProps<'div'> & {
+    'id':'xund-app-placeholder'
+    'client-id'?: string
+    'auth-code'?: string
+    'webapp-code'?: string
+    'gender'?: string
+    'birth'?: string 
+    'webapp-base-url'?: string
+    'auth-base-url'?: string
+  };
+  
+  const XUNDContainer = ({ ...props }: XUNDContainerProps) => {
+    return <div {...props} ></div>;
+  };
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
@@ -36,8 +49,18 @@ export default async function Home() {
         </div>
       </div>
 
+
       <div style={{width: '100vw', height: '100vh'}}>
-        <XUND client-id={process.env.XUND_AUTH_CLIENT_ID} webapp-code={process.env.XUND_WEBAPP_CODE} auth-code={authCode} />
+
+        <XUNDContainer 
+          id="xund-app-placeholder" 
+          client-id={process.env.XUND_AUTH_CLIENT_ID} 
+          webapp-code={process.env.XUND_WEBAPP_CODE} 
+          auth-code={authCode}
+        />
+
+        <Script src="https://public.xund.solutions/embed.js" />
+        
       </div>
 
       <div className="mb-32 mt-16 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">

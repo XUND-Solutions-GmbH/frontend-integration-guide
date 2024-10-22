@@ -13,15 +13,13 @@ export default async function Home() {
     `${process.env.XUND_AUTH_BASE_URL}/authorize?clientId=${process.env.XUND_AUTH_CLIENT_ID}&secretHash=${secretHash}&state=${state}`, 
   );
 
+  const authorizeResponseJson = await authorizeResponse.json()
+
   if (!authorizeResponse.ok) {
     throw new Error(`${authorizeResponse.status} ${JSON.stringify(authorizeResponseJson)}`)
   }
 
-  const authorizeResponseJson = await authorizeResponse.json()
-
   const {authCode} = authorizeResponseJson
-  console.log({authCode});
-  
 
   type XUNDContainerProps = React.ComponentProps<'div'> & {
     'id':'xund-app-placeholder'

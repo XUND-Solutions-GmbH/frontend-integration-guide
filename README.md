@@ -39,7 +39,7 @@ Please insert the following snippet into the body of your HTML page where you wa
 ```html
 <div id="your-container" style="width: 100vw; height: 100vh;">
   <script 
-    src="https://webapp.xund.solutions/embed.js" 
+    src="https://public.xund.solutions/embed.js" 
     client-id="***" 
   />
 </div>

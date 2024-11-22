@@ -53,7 +53,7 @@ We encourage our partners to use our [Backend Authentication Method](https://git
 
 ```html
 <script 
-  src="https://webapp.xund.solutions/embed.js" 
+  src="https://public.xund.solutions/embed.js" 
   client-id="***" 
   auth-code="***" 
 />

@@ -5,7 +5,7 @@ export default async function Home() {
 
   const state = crypto.randomUUID?.() ?? crypto.getRandomValues(new Uint32Array(40)).join('')
   
-  const hasher = createHmac('sha256', process.env.XUND_AUTH_CLIENT_SECRET ?? '')
+  const hasher = createHmac('sha256', process.env.XUND_AUTH_API_KEY as string)
   hasher.update(`${state}${process.env.XUND_AUTH_CLIENT_ID}`)
   const secretHash = hasher.digest('hex')
 
@@ -26,10 +26,10 @@ export default async function Home() {
     'client-id'?: string
     'auth-code'?: string
     'webapp-code'?: string
-    'gender'?: string
-    'birth'?: string 
     'webapp-base-url'?: string
     'auth-base-url'?: string
+    'gender'?: string
+    'birth'?: string
   };
   
   const XUNDContainer = ({ ...props }: XUNDContainerProps) => {
@@ -47,7 +47,6 @@ export default async function Home() {
         </div>
       </div>
 
-
       <div style={{width: '100vw', height: '100vh'}}>
 
         <XUNDContainer 
@@ -55,6 +54,8 @@ export default async function Home() {
           client-id={process.env.XUND_AUTH_CLIENT_ID} 
           webapp-code={process.env.XUND_WEBAPP_CODE} 
           auth-code={authCode}
+          auth-base-url={process.env.XUND_AUTH_BASE_URL}
+          webapp-base-url={process.env.XUND_WEBAPP_BASE_URL}
         />
 
         <Script src="https://public.xund.solutions/embed.js" />

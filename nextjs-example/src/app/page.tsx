@@ -10,7 +10,8 @@ export default async function Home() {
   const secretHash = hasher.digest('hex')
 
   const authorizeResponse = await fetch(
-    `${process.env.XUND_AUTH_BASE_URL}/authorize?clientId=${process.env.XUND_AUTH_CLIENT_ID}&secretHash=${secretHash}&state=${state}`, 
+    `${process.env.XUND_AUTH_BASE_URL}/authorize?clientId=${process.env.XUND_AUTH_CLIENT_ID}&secretHash=${secretHash}&state=${state}`,
+      { headers: { origin: 'http://localhost:3000'}}
   );
 
   const authorizeResponseJson = await authorizeResponse.json()

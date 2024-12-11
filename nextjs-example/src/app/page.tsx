@@ -1,28 +1,32 @@
+'use client'
+
 import Script from "next/script"
-import { createHmac } from 'crypto'
+import {ComponentProps, useEffect, useState} from "react"
 
-export default async function Home() {
+export default function Home() {
 
-  const state = crypto.randomUUID?.() ?? crypto.getRandomValues(new Uint32Array(40)).join('')
-  
-  const hasher = createHmac('sha256', process.env.XUND_AUTH_API_KEY as string)
-  hasher.update(`${state}${process.env.XUND_AUTH_CLIENT_ID}`)
-  const secretHash = hasher.digest('hex')
+  const state = crypto.randomUUID?.() ?? crypto.getRandomValues(new Uint32Array(40)).join('') // state is optional
+  const randomAuthCode = crypto.randomUUID?.() ?? crypto.getRandomValues(new Uint32Array(40)).join('')
+  const [authCode, setAuthCode] = useState('')
 
-  const authorizeResponse = await fetch(
-    `${process.env.XUND_AUTH_BASE_URL}/authorize?clientId=${process.env.XUND_AUTH_CLIENT_ID}&secretHash=${secretHash}&state=${state}`,
-      { headers: { origin: 'http://localhost:3000'}}
-  );
+  useEffect(() => {
+    const getAuthCode = async () => {
+      const authorizeResponse = await fetch(
+          `${process.env.NEXT_PUBLIC_XUND_AUTH_BASE_URL}/authorize?clientId=${process.env.NEXT_PUBLIC_XUND_AUTH_CLIENT_ID}&authCode=${randomAuthCode}&state=${state}`,
+      );
 
-  const authorizeResponseJson = await authorizeResponse.json()
+      const authorizeResponseJson = await authorizeResponse.json()
 
-  if (!authorizeResponse.ok) {
-    throw new Error(`${authorizeResponse.status} ${JSON.stringify(authorizeResponseJson)}`)
-  }
+      if (!authorizeResponse.ok) {
+        throw new Error(`${authorizeResponse.status} ${JSON.stringify(authorizeResponseJson)}`)
+      }
 
-  const {authCode} = authorizeResponseJson
+      return authorizeResponseJson.authCode
+    }
+    getAuthCode().then(setAuthCode)
+  }, [])
 
-  type XUNDContainerProps = React.ComponentProps<'div'> & {
+  type XUNDContainerProps = ComponentProps<'div'> & {
     'id':'xund-app-placeholder'
     'client-id'?: string
     'auth-code'?: string
@@ -49,18 +53,18 @@ export default async function Home() {
       </div>
 
       <div style={{width: '100vw', height: '100vh'}}>
-
-        <XUNDContainer 
+        {authCode && (<>
+        <XUNDContainer
           id="xund-app-placeholder" 
-          client-id={process.env.XUND_AUTH_CLIENT_ID} 
-          webapp-code={process.env.XUND_WEBAPP_CODE} 
+          client-id={process.env.NEXT_PUBLIC_XUND_AUTH_CLIENT_ID}
+          webapp-code={process.env.NEXT_PUBLIC_XUND_WEBAPP_CODE}
           auth-code={authCode}
-          auth-base-url={process.env.XUND_AUTH_BASE_URL}
-          webapp-base-url={process.env.XUND_WEBAPP_BASE_URL}
+          auth-base-url={process.env.NEXT_PUBLIC_XUND_AUTH_BASE_URL}
+          webapp-base-url={process.env.NEXT_PUBLIC_XUND_WEBAPP_BASE_URL}
         />
 
         <Script src="https://public.xund.solutions/embed.js" />
-        
+        </>)}
       </div>
 
       <div className="mb-32 mt-16 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">

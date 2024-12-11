@@ -31,8 +31,8 @@ a detailed instruction of embedding the XUND Web App and also provides examples 
 
 | Name             | Property Name     | Description                                                                                                  | Where to find?                                                                                                                                                                 |
 |------------------|-------------------|--------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Client ID        | `client-id`       | It's the unique identifier <br />of your organisation                                                        | Go to Client Hub and select <br />_API key_ from the left navigation <br />Scroll down for _Client ID_ [`📷`](readme-assets/clienthub-webapp-getcode.png)                      |
-| Web App Code     | `webapp-code`     | Any number of Web Apps <br />can be defined. Every app <br />has its own settings (e.g. <br />Custom colors) | Go to Client Hub and select <br />_WebApp_ from the left navigation <br />Scroll down for _Code_ [`📷`](readme-assets/clienthub-apikey-getkey.png)                             |
+| Client ID        | `client-id`       | It's the unique identifier <br />of your organisation                                                        | Go to Client Hub and select <br />_API key_ from the left navigation <br />Scroll down for _Client ID_ [`📷`](readme-assets/clienthub-apikey-getkey.png)                       |
+| Web App Code     | `webapp-code`     | Any number of Web Apps <br />can be defined. Every app <br />has its own settings (e.g. <br />Custom colors) | Go to Client Hub and select <br />_WebApp_ from the left navigation <br />Scroll down for _Code_ [`📷`](readme-assets/clienthub-webapp-getcode.png)                            |
 | Auth Code        | `auth-code`       | In order to authenticatate <br />the Check session it's <br />necessary to have a valid Auth Code            | If you have Frontent Authentication <br />enabled on Client Hub you'll get <br />one behind the scenes. Otherwise <br />you can get it during the Backend <br />Authentication |
 | Auth Base URL    | `auth-base-url`   | The URL of the authenticator service                                                                         | `https://login.xund.solutions/api`                                                                                                                                             |
 | Web App Base URL | `webapp-base-url` | The URL of the framed webapp.                                                                                | `https://frame.webapp.class2.xund.solutions`                                                                                                                                   |
@@ -47,7 +47,8 @@ quickly provide a full-featured Illness Check / Symptom Check to your users.
 > the [API Key](https://clienthub.xund.solutions/key/) section of Client Hub. [
 `📷`](readme-assets/clienthub-apikey-frontend.png)
 
-In this case, you authenticate with a custom, self-generated auth code, XUND backend will check only your origin - and authorise your auth code. Check [this](/only-frontend-example/src/app) repo.
+In this case, you authenticate with a custom, self-generated auth code, XUND backend will check only your origin - and
+authorise your auth code. Check [this](/only-frontend-example/src/app) repo.
 
 We recommend however to keep this option disabled and have the authentication implemented on your own
 server [as described here](https://github.com/XUND-Solutions-GmbH/backend-auth-flow-demo/) to ensure the maximum

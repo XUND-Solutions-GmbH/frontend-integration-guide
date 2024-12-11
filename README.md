@@ -47,21 +47,11 @@ quickly provide a full-featured Illness Check / Symptom Check to your users.
 > the [API Key](https://clienthub.xund.solutions/key/) section of Client Hub. [
 `📷`](readme-assets/clienthub-apikey-frontend.png)
 
+In this case, you authenticate with a custom, self-generated auth code, XUND backend will check only your origin - and authorise your auth code. Check [this](/only-frontend-example/src/app) repo.
+
 We recommend however to keep this option disabled and have the authentication implemented on your own
 server [as described here](https://github.com/XUND-Solutions-GmbH/backend-auth-flow-demo/) to ensure the maximum
 security of the Checks.
-
-Please insert the following snippet into the body of your HTML page where you want to have XUND Web App placed:
-
-```html
-
-<div id="your-container" style="width: 100vw; height: 100vh;">
-    <script
-            src="https://public.xund.solutions/embed.js"
-            client-id="***"
-    />
-</div>
-```
 
 [Where do I get `client-id`?](#keys-and-ids)
 

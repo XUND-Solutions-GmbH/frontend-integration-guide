@@ -16,7 +16,6 @@ export default function Home() {
       if (!authorizeResponse.ok) {
         throw new Error(`${authorizeResponse.status} ${JSON.stringify(authorizeResponseJson)}`)
       }
-
       return authorizeResponseJson.authCode
     }
     getAuthCode().then(setAuthCode)

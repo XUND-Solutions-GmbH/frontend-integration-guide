@@ -4,11 +4,13 @@ import Script from "next/script"
 import {ComponentProps, useEffect, useState} from "react"
 
 export default function Home() {
+  const myAuthCode = crypto.randomUUID?.() ?? crypto.getRandomValues(new Uint32Array(40)).join('')
+
   const [authCode, setAuthCode] = useState('')
   useEffect(() => {
     const getAuthCode = async () => {
       const authorizeResponse = await fetch(
-          `${process.env.NEXT_PUBLIC_XUND_AUTH_BASE_URL}/authorize?clientId=${process.env.NEXT_PUBLIC_XUND_AUTH_CLIENT_ID}`,
+          `${process.env.NEXT_PUBLIC_XUND_AUTH_BASE_URL}/authorize?clientId=${process.env.NEXT_PUBLIC_XUND_AUTH_CLIENT_ID}&authCode=${myAuthCode}`,
       );
 
       const authorizeResponseJson = await authorizeResponse.json()

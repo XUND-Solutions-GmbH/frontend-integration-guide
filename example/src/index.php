@@ -1,7 +1,7 @@
 <?php
 function authorize($clientId, $authBaseUrl) {
     $apiKey = getenv('XUND_AUTH_API_KEY');
-    $stateUuid = vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex(random_bytes(16)), 4));;
+    $stateUuid = vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex(random_bytes(16)), 4));
     $secretHash = hash_hmac('sha256',"$stateUuid$clientId" ,$apiKey);
 
     $curl = curl_init("$authBaseUrl/authorize?clientId=$clientId&secretHash=$secretHash&state=$stateUuid");

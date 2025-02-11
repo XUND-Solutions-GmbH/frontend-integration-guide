@@ -10,12 +10,41 @@ Please insert the following snippet into the body of your HTML page where you wa
   <script 
     src="https://public.xund.solutions/embed.js" 
     client-id="***" 
-    auth-code="***"
-  />
+    auth-code="***" 
+    auth-base-url="https://login.xund.solutions/api"
+    webapp-base-url="https://frame.webapp.class2.xund.solutions"
+  ></script>
 </div>
 ```
 
-Please note that you need to pass `client-id` and `webapp-code` to the script tag. Use the `client-id` from the Client Hub, the `auth-code` can be created on your server based on your API Key you got from us via 1Password. An example project of a valid `auth-code` creation can be found here.
+You have to pass `client-id` and `webapp-code` to the script tag. Use the `client-id` from the Client Hub, the `auth-code` should be created on your server based on your API Key you got from us via 1Password. An example project with a valid `auth-code` creation can be [found here](example/src/index.php). 
+
+
+## Setting up example
+
+* Copy the .env.test as .env and fill with your parameters. 
+* In your terminal enter the following:
+```terminal
+cd example
+./run_container.sh
+```
+* Visit localhost:3000
+
+
+## Quick try
+
+In case you you just want to try out the app, you don't have to pass auth-code at all. This requires the setting *Frontend authentication enabled* in [Client Hub](https://clienthub.xund.solutions/). We don't recommend to use it in production. 
+
+```html
+<div id="your-container" style="width: 100vw; height: 100vh;">
+  <script 
+    src="https://public.xund.solutions/embed.js" 
+    client-id="***" 
+    auth-base-url="https://login.xund.solutions/api"
+    webapp-base-url="https://frame.webapp.class2.xund.solutions"
+  ></script>
+</div>
+```
 
 
 ## Advanced options

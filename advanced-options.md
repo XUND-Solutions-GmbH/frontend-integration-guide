@@ -19,8 +19,6 @@ In [Client Hub](https://clienthub.xund.solutions/) you can define different Web 
 <script ... webapp-code="***" />
 ```
 
-[Where do I get this value?](#keys-and-ids)
-
 ### Add profile data
 
 If you want to launch the app with pre-defined profile data add these extra properties to the script tag: 

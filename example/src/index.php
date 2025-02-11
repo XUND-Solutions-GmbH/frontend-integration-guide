@@ -11,8 +11,8 @@ function authorize($clientId, $authBaseUrl) {
     return json_decode($response)->authCode;
 }
 
-$webappBaseUrl = getenv('XUND_WEBAPP_BASE_URL');
-$authBaseUrl = getenv('XUND_AUTH_BASE_URL');
+$webappBaseUrl = "https://frame.webapp.class2.xund.solutions";
+$authBaseUrl = "https://login.xund.solutions/api";
 $clientId = getenv("XUND_AUTH_CLIENT_ID");
 $authCode = authorize($clientId, $authBaseUrl);
 

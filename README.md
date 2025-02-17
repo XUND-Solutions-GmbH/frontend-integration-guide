@@ -20,6 +20,7 @@ You have to pass `client-id` and `auth-code` to the script tag. Use the `client-
 
 ## Setting up PHP example
 
+* The example requires [Docker](https://docs.docker.com/get-started/get-docker/)
 * Go to the [PHP example folder](example/src/index.php).
 * Copy the .env.test as .env and fill with your parameters. 
 * In your terminal enter the following:

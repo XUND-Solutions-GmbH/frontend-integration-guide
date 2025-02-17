@@ -28,7 +28,7 @@ If you want to launch the app with pre-defined profile data add these extra prop
 ```
 
 ### Start with
-If this is set, the welcome page is not visible on check restart. Possible values: HEALTH_CHECK, ILLNESS_CHECK, SYMPTOM_CHECK
+If this is set, the welcome page is not visible on check restart. Possible values: ILLNESS_CHECK, SYMPTOM_CHECK
 
 ```html
 <script ... direct-check="ILLNESS_CHECK" />

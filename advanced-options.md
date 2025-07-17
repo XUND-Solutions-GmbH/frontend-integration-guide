@@ -4,20 +4,9 @@
 ## Advanced options
 
 ##### Table of Contents  
-[Using a specific Web App instance](#using-a-specific-web-app-instance)  
 [Add profile data](#add-profile-data)  
 [Start with](#start-with)  
 [Setup a webhook passing your custom ID after each check](#setup-a-webhook-passing-your-custom-id-after-each-check) 
-
-
-
-### Using a specific Web App instance
-
-In [Client Hub](https://clienthub.xund.solutions/) you can define different Web App instances. Each Web App can have its own settings. Extend the properties of the script with `webapp-code`:
-
-```html
-<script ... webapp-code="***" />
-```
 
 ### Add profile data
 

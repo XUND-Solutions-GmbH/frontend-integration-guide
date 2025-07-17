@@ -22,6 +22,7 @@ function authorize($clientId, $authBaseUrl) {
 
 $authBaseUrl = "https://login.xund.solutions/api";
 $clientId = getenv("XUND_AUTH_CLIENT_ID");
+$webappCode = getenv("XUND_WEBAPP_CODE");
 $authCode = authorize($clientId, $authBaseUrl);
 
 
@@ -35,6 +36,7 @@ echo <<<EOF
     src="https://public.xund.solutions/embed.js"
     client-id="$clientId"
     auth-code="$authCode"
+    webapp-code="$webappCode"
     ></script>
 </div>
 </body>

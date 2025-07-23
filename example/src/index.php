@@ -11,8 +11,12 @@ function authorize($clientId, $authBaseUrl) {
     // hash state with client id with api key as a secret
     $secretHash = hash_hmac('sha256',"$stateUuid$clientId" ,$hashedApiKey);
 
-    // run request
+    // Option 1: authorization request
     $curl = curl_init("$authBaseUrl/authorize?clientId=$clientId&secretHash=$secretHash&state=$stateUuid");
+
+    // Option 2: authorization request when you want to get back the state in a Webhook callback
+    // $curl = curl_init("$authBaseUrl/authorize?clientId=$clientId&secretHash=$secretHash&state=$stateUuid&scope=state");
+
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
     $response = curl_exec($curl);
 

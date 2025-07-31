@@ -30,7 +30,7 @@ If you want to start the Symptom check with a specific symptom, add this propert
 <script ... direct-check-main-symptom-id="YOUR-SYMPTOM-ID" />
 ```
 #### Important notes
-- You must also set `direct-check="SYMPTOM_CHECK"`.
+- This will automatically set the property `direct-check="SYMPTOM_CHECK"`, so you don't have to set it.
 - The symptom ID must be a valid UUID format.
 
 ### Setup a webhook passing your custom ID after each check

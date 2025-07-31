@@ -25,7 +25,7 @@ If this is set, the welcome page is not visible on check restart. Possible value
 ```
 
 ### Start symptom check with a symptom ID
-If you want to start the Symptom check with a specific symptom, add these properties:
+If you want to start the Symptom check with a specific symptom, add this property:
 ```html
 <script ... direct-check-main-symptom-id="YOUR-SYMPTOM-ID" />
 ```

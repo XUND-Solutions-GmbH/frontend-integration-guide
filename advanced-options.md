@@ -5,7 +5,8 @@
 
 ##### Table of Contents  
 [Add profile data](#add-profile-data)  
-[Start with](#start-with)  
+[Start with](#start-with)
+[Start symptom check with a symptom ID](#start-symptom-check-with-a-symptom-id)
 [Setup a webhook passing your custom ID after each check](#setup-a-webhook-passing-your-custom-id-after-each-check) 
 
 ### Add profile data
@@ -22,6 +23,15 @@ If this is set, the welcome page is not visible on check restart. Possible value
 ```html
 <script ... direct-check="ILLNESS_CHECK" />
 ```
+
+### Start symptom check with a symptom ID
+If you want to start the Symptom check with a specific symptom, add this property:
+```html
+<script ... direct-check-main-symptom-id="YOUR-SYMPTOM-ID" />
+```
+#### Important notes
+- This will automatically set the property `direct-check="SYMPTOM_CHECK"`, so you don't have to set it.
+- The symptom ID must be a valid UUID format.
 
 ### Setup a webhook passing your custom ID after each check
 

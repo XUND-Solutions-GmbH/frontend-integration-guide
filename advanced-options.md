@@ -7,6 +7,7 @@
 [Add profile data](#add-profile-data)  
 [Start with](#start-with)
 [Start symptom check with a symptom ID](#start-symptom-check-with-a-symptom-id)
+[Add onboarding page](#add-onboarding-page)
 [Setup a webhook passing your custom ID after each check](#setup-a-webhook-passing-your-custom-id-after-each-check) 
 
 ### Add profile data
@@ -32,6 +33,12 @@ If you want to start the Symptom check with a specific symptom, add this propert
 #### Important notes
 - This will automatically set the property `direct-check="SYMPTOM_CHECK"`, so you don't have to set it.
 - The symptom ID must be a valid UUID format.
+
+### Add onboarding page
+If you want to add the onborading page before the Symptom or Illness checks start, add this property:
+```html
+<script ... onboarding="true" />
+```
 
 ### Setup a webhook passing your custom ID after each check
 

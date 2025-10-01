@@ -47,7 +47,8 @@ cd example
 ## Advanced options
 
 [Start with Symptom or Illness Check directly](advanced-options.md#start-with)  
-[Start Check with pre-defined profile data](advanced-options.md#add-profile-data)  
+[Start Check with pre-defined profile data](advanced-options.md#add-profile-data)
+[Add onboarding page](advanced-options.md#add-onboarding-page)
 [Setup a webhook passing your custom ID after each check](advanced-options.md#setup-a-webhook-passing-your-custom-id-after-each-check)
 
 

@@ -16,7 +16,7 @@ Please insert the following snippet into the body of your HTML page where you wa
 </div>
 ```
 
-You have to pass `client-id`, `webapp-code` and `auth-code` to the script tag. Use the `client-id` and `webapp-code` from the Client Hub, the `auth-code` should be created on your server based on your API Key you got from us via 1Password. A PHP example project with a valid `auth-code` creation can be [found here](example/src/index.php).
+You have to pass `client-id`, `webapp-code` and `auth-code` to the script tag. Use the `client-id` and `webapp-code` from the Client Hub, the `auth-code` should be created on your server based on your API Key you got from us via 1Password. Complete examples are provided for PHP and .NET inside `examples/`.
 
 If you want to integrate Health Check directly, specify the Health Check App explicitly in the ```web-app-base-url``` attribute of embedder.
 ```html
@@ -31,18 +31,23 @@ If you want to integrate Health Check directly, specify the Health Check App exp
 </div>
 ```
 
-## Setting up PHP example
+## Running the examples
 
-* The example requires [Docker](https://docs.docker.com/get-started/get-docker/)
-* Go to the [PHP example folder](example/src/index.php).
-* Copy the .env.test as .env and fill with your parameters. 
-* In your terminal enter the following:
+Examples rely on Docker regardless of language. Copy `.env.test` from the chosen example folder to `.env`, set your credentials, then run the helper script. Each container exposes the demo at `http://localhost:3000`.
+
+#### [PHP Example](examples/php/src/index.php)
+
 ```terminal
-cd example
+cd examples/php
 ./run_container.sh
 ```
-* Visit localhost:3000
 
+#### [.NET Example](examples/dotnet/src/Program.cs)
+
+```terminal
+cd examples/dotnet
+./run_container.sh
+```
 
 ## Advanced options
 

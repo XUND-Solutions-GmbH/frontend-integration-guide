@@ -17,8 +17,9 @@ public class AuthCodeService
     public async Task<string> FetchAuthCodeAsync(IntegrationConfiguration configuration)
     {
         var hashedApiKey = ComputeSha256Hex(configuration.ApiKey);
-        var state = Guid.NewGuid().ToString();
+        var state = Guid.NewGuid().ToString(); // Random UUID as a state parameter
         var secretInput = string.Concat(state, configuration.ClientId);
+        
         var secretHash = ComputeHmacSha256Hex(secretInput, hashedApiKey);
 
         var authorizeUri = BuildAuthorizeUri(configuration.AuthBaseUrl, configuration.ClientId, secretHash, state);
@@ -44,18 +45,17 @@ public class AuthCodeService
 
     private static string ComputeSha256Hex(string input)
     {
-        var bytes = Encoding.UTF8.GetBytes(input);
-        var hash = SHA256.HashData(bytes);
-        return Convert.ToHexString(hash).ToLowerInvariant();
+        var inputBytes = Encoding.UTF8.GetBytes(input);
+        var hashBytes = SHA256.HashData(inputBytes);
+        return Convert.ToHexString(hashBytes).ToLowerInvariant();
     }
 
     private static string ComputeHmacSha256Hex(string payload, string secret)
     {
-        var key = Encoding.UTF8.GetBytes(secret);
-        using var hmac = new HMACSHA256(key);
+        var secretBytes = Encoding.UTF8.GetBytes(secret);
         var payloadBytes = Encoding.UTF8.GetBytes(payload);
-        var signature = hmac.ComputeHash(payloadBytes);
-        return Convert.ToHexString(signature).ToLowerInvariant();
+        var hashBytes = HMACSHA256.HashData(secretBytes, payloadBytes);
+        return Convert.ToHexString(hashBytes).ToLowerInvariant();
     }
 
     private static string BuildAuthorizeUri(string baseUrl, string clientId, string secretHash, string state)

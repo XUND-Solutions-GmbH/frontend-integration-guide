@@ -8,23 +8,23 @@ var app = builder.Build();
 
 app.MapGet("/", async (AuthCodeService authCodeService) =>
 {
-    var configuration = loadIntegrationConfiguration();
+    var configuration = LoadIntegrationConfiguration();
     var authCode = await authCodeService.FetchAuthCodeAsync(configuration);
-    var page = renderHtml(configuration.ClientId, authCode, configuration.WebappCode);
+    var page = RenderHtml(configuration.ClientId, authCode, configuration.WebappCode);
     return Results.Content(page, "text/html");
 });
 
 app.Run();
 
-static IntegrationConfiguration loadIntegrationConfiguration()
+static IntegrationConfiguration LoadIntegrationConfiguration()
 {
-    var apiKey = readRequiredVariable("XUND_AUTH_API_KEY");
-    var clientId = readRequiredVariable("XUND_AUTH_CLIENT_ID");
-    var webappCode = readRequiredVariable("XUND_WEBAPP_CODE");
+    var apiKey = ReadRequiredVariable("XUND_AUTH_API_KEY");
+    var clientId = ReadRequiredVariable("XUND_AUTH_CLIENT_ID");
+    var webappCode = ReadRequiredVariable("XUND_WEBAPP_CODE");
     return new IntegrationConfiguration(apiKey, clientId, webappCode, "https://login.xund.solutions/api");
 }
 
-static string readRequiredVariable(string name)
+static string ReadRequiredVariable(string name)
 {
     var value = Environment.GetEnvironmentVariable(name);
     if (string.IsNullOrWhiteSpace(value))
@@ -34,7 +34,7 @@ static string readRequiredVariable(string name)
     return value;
 }
 
-static string renderHtml(string clientId, string authCode, string webappCode)
+static string RenderHtml(string clientId, string authCode, string webappCode)
 {
     return $"""
 <!DOCTYPE html>

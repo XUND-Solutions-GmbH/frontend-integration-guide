@@ -1,10 +1,23 @@
 # XUND Web App Integration Guide
 
-XUND Web App is a pre-made implementation of **[XUND APIs](https://xund-api-documentation.scrollhelp.site/xund-api-documentation/latest/general-information)** and it is ready for authorized clients to easily embed Symptom/Illness/Health Check into their website. The following guide is a detailed instruction of embedding the XUND Web App and also provides examples for quick and easy implementation.
+XUND Web App is a pre-made implementation of **[XUND APIs](https://xund-api-documentation.scrollhelp.site/xund-api-documentation/latest/general-information)** and it is ready for authorized clients to easily embed Symptom/Illness/Health Check into their website. This guide explains two supported integration methods and provides runnable examples.
 
 
+## Choose your integration method
 
-Please insert the following snippet into the body of your HTML page where you want to have XUND Web App placed:
+You can integrate the XUND Web App in two ways.
+
+- Simple Script Embed (quickest to implement)
+- Client-Side JS API (more flexible, event-driven)
+
+Pick the one that best fits your needs.
+
+---
+
+## Simple Script Embed (easiest)
+
+Insert the following snippet into the body of your HTML page where you want to place the XUND Web App:
+
 ```html
 <div id="your-container" style="width: 100vw; height: 100vh;">
   <script 
@@ -16,9 +29,10 @@ Please insert the following snippet into the body of your HTML page where you wa
 </div>
 ```
 
-You have to pass `client-id`, `webapp-code` and `auth-code` to the script tag. Use the `client-id` and `webapp-code` from the Client Hub, the `auth-code` should be created on your server based on your API Key you got from us via 1Password. Complete examples are provided for PHP and .NET inside `examples/`.
+You must pass `client-id`, `webapp-code`, and `auth-code` to the script tag. Use the `client-id` and `webapp-code` from the Client Hub. The `auth-code` should be created on your server using your API Key (provided via 1Password). Complete examples are provided for PHP and .NET inside `examples/`.
 
-If you want to integrate Health Check directly, specify the Health Check App explicitly in the ```web-app-base-url``` attribute of embedder.
+If you want to integrate Health Check directly, specify the Health Check App explicitly in the `web-app-base-url` attribute of the script:
+
 ```html
 <div id="your-container" style="width: 100vw; height: 100vh;">
   <script 
@@ -29,6 +43,84 @@ If you want to integrate Health Check directly, specify the Health Check App exp
     webapp-base-url="https://frame.health-check.class2.xund.solutions/"
   ></script>
 </div>
+```
+
+---
+
+## Client-Side JS API (more control)
+
+This method gives you a JavaScript API to initialize the app and handle events.
+
+> ⚠️ This method currently only supports Symptom/Illness check integration. Health Check is not yet supported.
+
+### Initialization
+
+Include the `embed.js` script and initialize via `XUND.scic.init`:
+
+```html
+<div id="xundwebapp"></div>
+<script src="https://public.xund.solutions/embed.js"></script>
+<script>
+  const xundApp = XUND.scic.init({
+    clientId: '***',
+    webAppCode: '***',
+    authCode: '***',
+    targetContainerId: 'xundwebapp',
+  });
+</script>
+```
+
+### Customize the Check Report action button
+
+You can customize the action button on the report page:
+
+```javascript
+const xundApp = XUND.scic.init({
+  clientId: '***',
+  webAppCode: '***',
+  authCode: '***',
+  targetContainerId: 'xundwebapp',
+
+  checkReport: {
+    actionButton: {
+      labelText: 'Save',
+      onClick: () => { /* your code here */ },
+    },
+  },
+});
+```
+
+### Fetch the Check Report data
+
+Use `getCheckReportData` to read the report (returns `undefined` until available):
+
+```javascript
+const xundApp = XUND.scic.init({ /* ... */ });
+xundApp.getCheckReportData().then((report) => {
+  console.log('This is the check report', report);
+});
+```
+
+Combine it with the action button handler:
+
+```javascript
+const xundApp = XUND.scic.init({
+  clientId: '***',
+  webAppCode: '***',
+  authCode: '***',
+  targetContainerId: 'xundwebapp',
+
+  checkReport: {
+    actionButton: {
+      labelText: 'Save',
+      onClick: () => {
+        xundApp.getCheckReportData().then((report) => {
+          console.log('This is the check report', report);
+        });
+      },
+    },
+  },
+});
 ```
 
 ## Running the examples
@@ -51,10 +143,10 @@ cd examples/dotnet
 
 ## Advanced options
 
-[Start with Symptom or Illness Check directly](advanced-options.md#start-with)  
-[Start Check with pre-defined profile data](advanced-options.md#add-profile-data)
-[Add onboarding page](advanced-options.md#add-onboarding-page)
-[Setup a webhook passing your custom ID after each check](advanced-options.md#setup-a-webhook-passing-your-custom-id-after-each-check)
+- [Start with Symptom or Illness Check directly](advanced-options.md#start-with)
+- [Start Check with pre-defined profile data](advanced-options.md#add-profile-data)
+- [Add onboarding page](advanced-options.md#add-onboarding-page)
+- [Setup a webhook passing your custom ID after each check](advanced-options.md#setup-a-webhook-passing-your-custom-id-after-each-check)
 
 
 ##

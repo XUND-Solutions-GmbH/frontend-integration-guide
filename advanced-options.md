@@ -22,16 +22,18 @@ If you want to launch the app with pre-defined profile data add these extra prop
 JS API equivalent:
 
 ```javascript
-const xundApp = XUND.scic.init({
-  clientId: '***',
-  webAppCode: '***',
-  authCode: '***',
-  targetContainerId: 'xundwebapp',
+(async () => {
+  const xundApp = XUND.scic.init({
+    clientId: '***',
+    webAppCode: '***',
+    authCode: '***',
+    targetContainerId: 'xundwebapp',
 
-  // Pre-fill profile data
-  gender: 'female',
-  birth: '2000-12-31', // YYYY-MM-DD
-});
+    // Pre-fill profile data
+    gender: 'female',
+    birth: '2000-12-31', // YYYY-MM-DD
+  });
+}()
 ```
 
 ### Start with
@@ -44,14 +46,16 @@ If this is set, the welcome page is not visible on check restart. Possible value
 JS API equivalent:
 
 ```javascript
-const xundApp = XUND.scic.init({
-  clientId: '***',
-  webAppCode: '***',
-  authCode: '***',
-  targetContainerId: 'xundwebapp',
+(async () => {
+  const xundApp = XUND.scic.init({
+    clientId: '***',
+    webAppCode: '***',
+    authCode: '***',
+    targetContainerId: 'xundwebapp',
 
-  directCheck: 'ILLNESS_CHECK', // or 'SYMPTOM_CHECK'
-});
+    directCheck: 'ILLNESS_CHECK', // or 'SYMPTOM_CHECK'
+  });
+})()
 ```
 
 ### Start symptom check with a symptom ID
@@ -66,15 +70,17 @@ If you want to start the Symptom check with a specific symptom, add this propert
 JS API equivalent:
 
 ```javascript
-const xundApp = XUND.scic.init({
-  clientId: '***',
-  webAppCode: '***',
-  authCode: '***',
-  targetContainerId: 'xundwebapp',
+(async () => {
+  const xundApp = XUND.scic.init({
+    clientId: '***',
+    webAppCode: '***',
+    authCode: '***',
+    targetContainerId: 'xundwebapp',
 
-  directCheckMainSymptomId: 'YOUR-SYMPTOM-ID',
-  // Note: This implicitly sets directCheck = 'SYMPTOM_CHECK'
-});
+    directCheckMainSymptomId: 'YOUR-SYMPTOM-ID',
+    // Note: This implicitly sets directCheck = 'SYMPTOM_CHECK'
+  });
+})()
 ```
 
 ### Add onboarding page
@@ -86,14 +92,16 @@ If you want to add the onborading page before the Symptom or Illness checks star
 JS API equivalent:
 
 ```javascript
-const xundApp = XUND.scic.init({
-  clientId: '***',
-  webAppCode: '***',
-  authCode: '***',
-  targetContainerId: 'xundwebapp',
+(async () => {
+  const xundApp = XUND.scic.init({
+    clientId: '***',
+    webAppCode: '***',
+    authCode: '***',
+    targetContainerId: 'xundwebapp',
 
-  onboarding: true,
-});
+    onboarding: true,
+  });
+})()
 ```
 
 ### Setup a webhook passing your custom ID after each check
@@ -117,14 +125,16 @@ Then extend the script's properties with `state`:
 JS API equivalent:
 
 ```javascript
-const xundApp = XUND.scic.init({
-  clientId: '***',
-  webAppCode: '***',
-  authCode: '***',
-  targetContainerId: 'xundwebapp',
+(async () => {
+  const xundApp = XUND.scic.init({
+    clientId: '***',
+    webAppCode: '***',
+    authCode: '***',
+    targetContainerId: 'xundwebapp',
 
-  state: 'YOUR-CUSTOM-ID',
-});
+    state: 'YOUR-CUSTOM-ID',
+  });
+})()
 ```
 
 #### Step 4: Webhook callback

@@ -61,12 +61,14 @@ Include the `embed.js` script and initialize via `XUND.scic.init`:
 <div id="xundwebapp"></div>
 <script src="https://public.xund.solutions/embed.js"></script>
 <script>
-  const xundApp = XUND.scic.init({
-    clientId: '***',
-    webAppCode: '***',
-    authCode: '***',
-    targetContainerId: 'xundwebapp',
-  });
+  (async () => {
+    const xundApp = XUND.scic.init({
+      clientId: '***',
+      webAppCode: '***',
+      authCode: '***',
+      targetContainerId: 'xundwebapp',
+    });
+  })()
 </script>
 ```
 
@@ -75,19 +77,21 @@ Include the `embed.js` script and initialize via `XUND.scic.init`:
 You can customize the action button on the report page:
 
 ```javascript
-const xundApp = XUND.scic.init({
-  clientId: '***',
-  webAppCode: '***',
-  authCode: '***',
-  targetContainerId: 'xundwebapp',
+(async () => {
+  const xundApp = XUND.scic.init({
+    clientId: '***',
+    webAppCode: '***',
+    authCode: '***',
+    targetContainerId: 'xundwebapp',
 
-  checkReport: {
-    actionButton: {
-      labelText: 'Save',
-      onClick: () => { /* your code here */ },
+    checkReport: {
+      actionButton: {
+        labelText: 'Save',
+        onClick: () => { /* your code here */ },
+      },
     },
-  },
-});
+  });
+})()
 ```
 
 ### Fetch the Check Report data
@@ -95,32 +99,36 @@ const xundApp = XUND.scic.init({
 Use `getCheckReportData` to read the report (returns `undefined` until available):
 
 ```javascript
-const xundApp = XUND.scic.init({ /* ... */ });
-xundApp.getCheckReportData().then((report) => {
-  console.log('This is the check report', report);
-});
+(async () => {
+  const xundApp = XUND.scic.init({ /* ... */ });
+  xundApp.getCheckReportData().then((report) => {
+    console.log('This is the check report', report);
+  });
+})()
 ```
 
 Combine it with the action button handler:
 
 ```javascript
-const xundApp = XUND.scic.init({
-  clientId: '***',
-  webAppCode: '***',
-  authCode: '***',
-  targetContainerId: 'xundwebapp',
+(async () => {
+  const xundApp = XUND.scic.init({
+    clientId: '***',
+    webAppCode: '***',
+    authCode: '***',
+    targetContainerId: 'xundwebapp',
 
-  checkReport: {
-    actionButton: {
-      labelText: 'Save',
-      onClick: () => {
-        xundApp.getCheckReportData().then((report) => {
-          console.log('This is the check report', report);
-        });
+    checkReport: {
+      actionButton: {
+        labelText: 'Save',
+        onClick: () => {
+          xundApp.getCheckReportData().then((report) => {
+            console.log('This is the check report', report);
+          });
+        },
       },
     },
-  },
-});
+  });
+})()
 ```
 
 ## Running the examples

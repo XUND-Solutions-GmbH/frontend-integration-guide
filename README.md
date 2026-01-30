@@ -36,7 +36,7 @@ If you want to integrate Health Check directly, specify the Health Check App exp
 ```html
 <div id="your-container" style="width: 100vw; height: 100vh;">
   <script 
-    src="https://public.xund.solutions/embed.js" 
+    src="https://frame.health-check.development.xund.solutions/embed.js" 
     client-id="***"
     webapp-code="***" 
     auth-code="***"
@@ -49,11 +49,11 @@ If you want to integrate Health Check directly, specify the Health Check App exp
 
 ## Client-Side JS API (more control)
 
-This method gives you a JavaScript API to initialize the app and handle events.
+This method gives you a JavaScript API to initialize the app and handle events. Both Symptom/Illness Check and Health Check are supported.
 
-> ⚠️ This method currently only supports Symptom/Illness check integration. Health Check is not yet supported.
+### Symptom/Illness Check JS API
 
-### Initialization
+#### Initialization
 
 Include the `embed.js` script and initialize via `XUND.scic.init`:
 
@@ -72,7 +72,7 @@ Include the `embed.js` script and initialize via `XUND.scic.init`:
 </script>
 ```
 
-### Customize the Check Report action button
+#### Customize the Check Report action button
 
 You can customize the action button on the report page:
 
@@ -94,7 +94,7 @@ You can customize the action button on the report page:
 })()
 ```
 
-### Fetch the Check Report data
+#### Fetch the Check Report data
 
 Use `getCheckReportData` to read the report (returns `undefined` until available):
 
@@ -131,6 +131,39 @@ Combine it with the action button handler:
 })()
 ```
 
+### Health Check JS API
+
+#### Initialization
+
+Include the `embed.js` script and initialize via `XUND.hc.init`:
+
+```html
+<div id="xundwebapp"></div>
+<script src="https://frame.health-check.development.xund.solutions/embed.js"></script>
+<script>
+  (async () => {
+    const xundApp = await XUND.hc.init({
+      targetContainerId: 'xundwebapp',
+      clientId: '***',
+      webappBaseUrl: 'https://frame.health-check.class2.xund.solutions/',
+      authBaseUrl: 'https://login.development.xund.solutions/api',
+    });
+  })()
+</script>
+```
+
+#### Customize the Check Report action button
+
+> ⚠️ This method currently not yet available.
+
+#### Fetch the Check Report data
+
+> ⚠️ This method currently not yet available.
+
+Combine it with the action button handler:
+
+> ⚠️ This method currently not yet available.
+
 ## Running the examples
 
 Examples rely on Docker regardless of language. Copy `.env.test` from the chosen example folder to `.env`, set your credentials, then run the helper script. Each container exposes the demo at `http://localhost:3000`.
@@ -155,6 +188,7 @@ cd examples/dotnet
 - [Start Check with pre-defined profile data](advanced-options.md#add-profile-data)
 - [Add onboarding page](advanced-options.md#add-onboarding-page)
 - [Setup a webhook passing your custom ID after each check](advanced-options.md#setup-a-webhook-passing-your-custom-id-after-each-check)
+- [Available Parameters](advanced-options.md#available-parameters)
 
 
 ##

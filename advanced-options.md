@@ -9,7 +9,7 @@
 - [Start symptom check with a symptom ID](#start-symptom-check-with-a-symptom-id)
 - [Add onboarding page](#add-onboarding-page)
 - [Setup a webhook passing your custom ID after each check](#setup-a-webhook-passing-your-custom-id-after-each-check)
-
+- [Available Parameters](#available-parameters)
 
 ### Add profile data
 
@@ -144,6 +144,33 @@ On your defined endpoint you'll receive a message like this:
 ```json
 {"checkId":"***", "state":"YOUR-CUSTOM-ID"}
 ```
+
+### Available Parameters
+
+The following table lists all available parameters for SCIC (web-app) and HC (health-check-web-app) integrations, indicating which parameters are available in each integration type.
+
+| Parameter | HTML Attribute | JS API Property | Type | Required | SCIC | HC |
+|-----------|---------------|----------------|------|----------|------|-----|
+| Client ID | `client-id` | `clientId` | `string` | Yes | ✓ | ✓ |
+| Web App Code | `webapp-code` | `webappCode` | `string` | No* | ✓ | ✓ |
+| Web App Base URL | `webapp-base-url` | `webappBaseUrl` | `string` | No* | ✓ | ✓ |
+| Auth Base URL | `auth-base-url` | `authBaseUrl` | `string` | No | ✓ | ✓ |
+| Auth Code | `auth-code` | `authCode` | `string` | No | ✓ | ✓ |
+| Target Container ID | N/A | `targetContainerId` | `string` | Yes (JS API) | ✓ | ✓ |
+| State | `state` | `state` | `string` | No | ✓ | ✓ |
+| Check ID | `check-id` | `checkId` | `string` | No | ✓ | ✓ |
+| Birth Date | `birth` | `customization.birth` | `string` (YYYY-MM-DD) | No | ✓ |
+| Gender | `gender` | `customization.gender` | `string` (FEMALE/MALE) | No | ✓ | ✓ |
+| Sex | `sex` | `customization.sex` | `string` (male/female) | No | | ✓ |
+| Weight | `weight` | `customization.weight` | `number` | No | | ✓ |
+| Height | `height` | `customization.height` | `number` | No | | ✓ |
+| Age | `age` | `customization.age` | `number` | No | | ✓ |
+| Risk Topics | `risk-topics` | `customization.riskTopics` | `string[]` | No | | ✓ |
+| Direct Check | `direct-check` | `customization.directCheck` | `string` (ILLNESS_CHECK/SYMPTOM_CHECK) | No | ✓ |
+| Direct Check Main Symptom ID | `direct-check-main-symptom-id` | `customization.directCheckMainSymptomId` | `string` (UUID) | No | ✓ |
+| Onboarding | `onboarding` | `customization.onboarding` | `boolean` | No | ✓ |
+| On Check Start | N/A | `customization.onCheckStart` | `function` | No | | ✓ |
+| Check Report Action Button | N/A | `customization.checkReport.actionButton` | `object` or `boolean` | No | ✓ |
 
 ##
 

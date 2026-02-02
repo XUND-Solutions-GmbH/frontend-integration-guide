@@ -147,6 +147,9 @@ Include the `embed.js` script and initialize via `XUND.hc.init`:
       clientId: '***',
       webappBaseUrl: 'https://frame.health-check.class2.xund.solutions/',
       authBaseUrl: 'https://login.development.xund.solutions/api',
+      onCheckStart: (checkId) => {
+        console.log('checkId', checkId)
+      }
     });
   })()
 </script>

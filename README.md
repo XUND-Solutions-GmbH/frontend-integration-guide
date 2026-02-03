@@ -41,12 +41,12 @@ If you want to integrate **Health Check** directly, specify the Health Check App
     webapp-code="***" 
     auth-code="***"
     webapp-base-url="https://frame.health-check.class2.xund.solutions/"
-    language="en"
+    app-language="en"
   ></script>
 </div>
 ```
 
-> **Note:** If the `language` parameter is passed via integration, the language selector menu will be hidden in the side menu.
+> **Note:** If the `app-language` parameter is passed via integration, the language selector menu will be hidden in the side menu.
 
 ---
 
@@ -150,7 +150,7 @@ Include the `embed.js` script and initialize via `XUND.hc.init`:
       clientId: '***',
       webappBaseUrl: 'https://frame.health-check.class2.xund.solutions/',
       authBaseUrl: 'https://login.development.xund.solutions/api',
-      language: 'en',
+      appLanguage: 'en',
       onCheckStart: (checkId) => {
         console.log('checkId', checkId)
       }
@@ -159,7 +159,7 @@ Include the `embed.js` script and initialize via `XUND.hc.init`:
 </script>
 ```
 
-> **Note:** If the `language` parameter is passed via integration, the language selector menu will be hidden in the side menu.
+> **Note:** If the `appLanguage` parameter is passed via integration, the language selector menu will be hidden in the side menu.
 
 
 ## Running the examples

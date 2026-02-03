@@ -159,7 +159,7 @@ The following table lists all available parameters for SCIC (web-app) and HC (he
 | Target Container ID | N/A | `targetContainerId` | `string` | Yes (JS API) | ✓ | ✓ |
 | State | `state` | `state` | `string` | No | ✓ | ✓ |
 | Check ID | `check-id` | `checkId` | `string` | No | ✓ | ✓ |
-| Language | `language` | `language` | `string` | No | | ✓ |
+| Language | `app-language` | `appLanguage` | `string` | No | | ✓ |
 | Birth Date | `birth` | `customization.birth` | `string` (YYYY-MM-DD) | No | ✓ |
 | Gender | `gender` | `customization.gender` | `string` (FEMALE/MALE) | No | ✓ | ✓ |
 | Sex | `sex` | `customization.sex` | `string` (male/female) | No | | ✓ |

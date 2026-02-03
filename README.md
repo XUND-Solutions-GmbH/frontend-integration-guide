@@ -31,7 +31,7 @@ Insert the following snippet into the body of your HTML page where you want to p
 
 You must pass `client-id`, `webapp-code`, and `auth-code` to the script tag. Use the `client-id` and `webapp-code` from the Client Hub. The `auth-code` should be created on your server using your API Key (provided via 1Password). Complete examples are provided for PHP and .NET inside `examples/`.
 
-If you want to integrate Health Check directly, specify the Health Check App explicitly in the `web-app-base-url` attribute of the script:
+If you want to integrate **Health Check** directly, specify the Health Check App explicitly in the `web-app-base-url` attribute of the script:
 
 ```html
 <div id="your-container" style="width: 100vw; height: 100vh;">
@@ -41,6 +41,7 @@ If you want to integrate Health Check directly, specify the Health Check App exp
     webapp-code="***" 
     auth-code="***"
     webapp-base-url="https://frame.health-check.class2.xund.solutions/"
+    language="en"
   ></script>
 </div>
 ```
@@ -147,6 +148,7 @@ Include the `embed.js` script and initialize via `XUND.hc.init`:
       clientId: '***',
       webappBaseUrl: 'https://frame.health-check.class2.xund.solutions/',
       authBaseUrl: 'https://login.development.xund.solutions/api',
+      language: 'en',
       onCheckStart: (checkId) => {
         console.log('checkId', checkId)
       }
@@ -155,17 +157,6 @@ Include the `embed.js` script and initialize via `XUND.hc.init`:
 </script>
 ```
 
-#### Customize the Check Report action button
-
-> ⚠️ This method currently not yet available.
-
-#### Fetch the Check Report data
-
-> ⚠️ This method currently not yet available.
-
-Combine it with the action button handler:
-
-> ⚠️ This method currently not yet available.
 
 ## Running the examples
 

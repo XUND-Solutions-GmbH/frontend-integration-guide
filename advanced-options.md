@@ -36,6 +36,27 @@ JS API equivalent:
 }()
 ```
 
+### Hide logo and menu in the header (HC only)
+
+```html
+<script ... compact-mode="true" />
+```
+
+JS API equivalent:
+
+```javascript
+(async () => {
+  const xundApp = XUND.hc.init({
+    clientId: '***',
+    webAppCode: '***',
+    authCode: '***',
+    targetContainerId: 'xundwebapp',
+
+    compactMode: true
+  });
+}()
+```
+
 ### Start with
 If this is set, the welcome page is not visible on check restart. Possible values: ILLNESS_CHECK, SYMPTOM_CHECK
 
@@ -160,6 +181,7 @@ The following table lists all available parameters for SCIC (web-app) and HC (he
 | State | `state` | `state` | `string` | No | ✓ | ✓ |
 | Check ID | `check-id` | `checkId` | `string` | No | ✓ | ✓ |
 | Language | `app-language` | `appLanguage` | `string` | No | | ✓ |
+| Compact Mode | `compact-mode` | `compactMode` | `boolean` | No | | ✓ |
 | Birth Date | `birth` | `customization.birth` | `string` (YYYY-MM-DD) | No | ✓ |
 | Gender | `gender` | `customization.gender` | `string` (FEMALE/MALE) | No | ✓ | ✓ |
 | Sex | `sex` | `customization.sex` | `string` (male/female) | No | | ✓ |

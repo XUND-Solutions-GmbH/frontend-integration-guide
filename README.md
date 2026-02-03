@@ -46,6 +46,8 @@ If you want to integrate **Health Check** directly, specify the Health Check App
 </div>
 ```
 
+> **Note:** If the `language` parameter is passed via integration, the language selector menu will be hidden in the side menu.
+
 ---
 
 ## Client-Side JS API (more control)
@@ -156,6 +158,8 @@ Include the `embed.js` script and initialize via `XUND.hc.init`:
   })()
 </script>
 ```
+
+> **Note:** If the `language` parameter is passed via integration, the language selector menu will be hidden in the side menu.
 
 
 ## Running the examples

@@ -105,7 +105,7 @@ JS API equivalent:
 ```
 
 ### Add onboarding page
-If you want to add the onborading page before the Symptom or Illness checks start, add this property:
+If you want to add the onboarding page before the Symptom or Illness checks start, add this property:
 ```html
 <script ... onboarding="true" />
 ```
@@ -124,6 +124,8 @@ JS API equivalent:
   });
 })()
 ```
+
+To display the onboarding page in the Health Check app, call `XUND.hc.init` instead of `XUND.scic.init`.
 
 ### Setup a webhook passing your custom ID after each check
 
@@ -191,7 +193,7 @@ The following table lists all available parameters for SCIC (web-app) and HC (he
 | Risk Topics | `risk-topics` | `customization.riskTopics` | `string[]` | No | | ✓ |
 | Direct Check | `direct-check` | `customization.directCheck` | `string` (ILLNESS_CHECK/SYMPTOM_CHECK) | No | ✓ |
 | Direct Check Main Symptom ID | `direct-check-main-symptom-id` | `customization.directCheckMainSymptomId` | `string` (UUID) | No | ✓ |
-| Onboarding | `onboarding` | `customization.onboarding` | `boolean` | No | ✓ |
+| Onboarding | `onboarding` | `customization.onboarding` | `boolean` | No | ✓ | ✓ |
 | On Check Start | N/A | `customization.onCheckStart` | `function` | No | | ✓ |
 | Check Report Action Button | N/A | `customization.checkReport.actionButton` | `object` or `boolean` | No | ✓ |
 

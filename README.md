@@ -36,7 +36,7 @@ If you want to integrate **Health Check** directly, specify the Health Check App
 ```html
 <div id="your-container" style="width: 100vw; height: 100vh;">
   <script 
-    src="https://frame.health-check.development.xund.solutions/embed.js" 
+    src="https://frame.health-check.class2.xund.solutions/embed.js" 
     client-id="***"
     webapp-code="***" 
     auth-code="***"
@@ -142,14 +142,14 @@ Include the `embed.js` script and initialize via `XUND.hc.init`:
 
 ```html
 <div id="xundwebapp"></div>
-<script src="https://frame.health-check.development.xund.solutions/embed.js"></script>
+<script src="https://frame.health-check.class2.xund.solutions/embed.js"></script>
 <script>
   (async () => {
     const xundApp = await XUND.hc.init({
       targetContainerId: 'xundwebapp',
       clientId: '***',
       webappBaseUrl: 'https://frame.health-check.class2.xund.solutions/',
-      authBaseUrl: 'https://login.development.xund.solutions/api',
+      authBaseUrl: 'https://login.class2.xund.solutions/api',
       appLanguage: 'en',
       onCheckStart: (checkId) => {
         console.log('checkId', checkId)

@@ -86,13 +86,14 @@ You can customize the action button on the report page:
     webAppCode: '***',
     authCode: '***',
     targetContainerId: 'xundwebapp',
-
-    checkReport: {
-      actionButton: {
-        labelText: 'Save',
-        onClick: () => { /* your code here */ },
-      },
-    },
+    customization: {
+      checkReport: {
+        actionButton: {
+          labelText: 'Save',
+          onClick: () => { /* your code here */ },
+        },
+      }
+    }    
   });
 })()
 ```
@@ -120,16 +121,18 @@ Combine it with the action button handler:
     authCode: '***',
     targetContainerId: 'xundwebapp',
 
-    checkReport: {
-      actionButton: {
-        labelText: 'Save',
-        onClick: () => {
-          xundApp.getCheckReportData().then((report) => {
-            console.log('This is the check report', report);
-          });
+    customization: {
+      checkReport: {
+        actionButton: {
+          labelText: 'Save',
+          onClick: () => {
+            xundApp.getCheckReportData().then((report) => {
+              console.log('This is the check report', report);
+            });
+          },
         },
-      },
-    },
+      }
+    }    
   });
 })()
 ```

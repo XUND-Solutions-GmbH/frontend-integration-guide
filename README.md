@@ -100,12 +100,12 @@ You can customize the action button on the report page:
 
 #### Fetch the Check Report data
 
-Use `getCheckReportData` to read the report (returns `undefined` until available):
+Use `getReportData` to read the report (returns `undefined` until available):
 
 ```javascript
 (async () => {
   const xundApp = XUND.scic.init({ /* ... */ });
-  xundApp.getCheckReportData().then((report) => {
+  xundApp.getReportData().then((report) => {
     console.log('This is the check report', report);
   });
 })()
@@ -126,7 +126,7 @@ Combine it with the action button handler:
         actionButton: {
           labelText: 'Save',
           onClick: () => {
-            xundApp.getCheckReportData().then((report) => {
+            xundApp.getReportData().then((report) => {
               console.log('This is the check report', report);
             });
           },

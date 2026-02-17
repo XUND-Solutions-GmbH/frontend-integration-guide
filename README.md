@@ -67,7 +67,7 @@ Include the `embed.js` script and initialize via `XUND.scic.init`:
   (async () => {
     const xundApp = XUND.scic.init({
       clientId: '***',
-      webAppCode: '***',
+      webappCode: '***',
       authCode: '***',
       targetContainerId: 'xundwebapp',
     });
@@ -83,7 +83,7 @@ You can customize the action button on the report page:
 (async () => {
   const xundApp = XUND.scic.init({
     clientId: '***',
-    webAppCode: '***',
+    webappCode: '***',
     authCode: '***',
     targetContainerId: 'xundwebapp',
     customization: {
@@ -117,7 +117,7 @@ Combine it with the action button handler:
 (async () => {
   const xundApp = XUND.scic.init({
     clientId: '***',
-    webAppCode: '***',
+    webappCode: '***',
     authCode: '***',
     targetContainerId: 'xundwebapp',
 

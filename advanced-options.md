@@ -5,6 +5,7 @@
 
 ##### Table of Contents  
 - [Add profile data](#add-profile-data)
+- [Hide logo and menu in the header](#hide-logo-and-menu-in-the-header-hc-only)
 - [Start with](#start-with)
 - [Start symptom check with a symptom ID](#start-symptom-check-with-a-symptom-id)
 - [Add onboarding page](#add-onboarding-page)
@@ -53,9 +54,11 @@ JS API equivalent:
     authCode: '***',
     targetContainerId: 'xundwebapp',
 
-    compactMode: true
+    customization: {
+      compactMode: true,
+    },
   });
-}()
+})()
 ```
 
 ### Start with
@@ -207,7 +210,7 @@ The following table lists all available parameters for SCIC (web-app) and HC (he
 | State | `state` | `state` | `string` | No | ✓ | ✓ |
 | Check ID | `check-id` | `checkId` | `string` | No | ✓ | ✓ |
 | Language | `app-language` | `appLanguage` | `string` | No | | ✓ |
-| Compact Mode | `compact-mode` | `compactMode` | `boolean` | No | | ✓ |
+| Compact Mode | `compact-mode` | `customization.compactMode` | `boolean` | No | | ✓ |
 | Birth Date | `birth` | `customization.birth` | `string` (YYYY-MM-DD) | No | ✓ |
 | Gender | `gender` | `customization.gender` | `string` (FEMALE/MALE) | No | ✓ | ✓ |
 | Sex | `sex` | `customization.sex` | `string` (male/female) | No | | ✓ |

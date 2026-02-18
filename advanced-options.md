@@ -5,9 +5,11 @@
 
 ##### Table of Contents  
 - [Add profile data](#add-profile-data)
+- [Hide logo and menu in the header](#hide-logo-and-menu-in-the-header-hc-only)
 - [Start with](#start-with)
 - [Start symptom check with a symptom ID](#start-symptom-check-with-a-symptom-id)
 - [Add onboarding page](#add-onboarding-page)
+- [Subscribe to report shown event](#subscribe-to-report-shown-event)
 - [Setup a webhook passing your custom ID after each check](#setup-a-webhook-passing-your-custom-id-after-each-check)
 - [Available Parameters](#available-parameters)
 
@@ -52,9 +54,11 @@ JS API equivalent:
     authCode: '***',
     targetContainerId: 'xundwebapp',
 
-    compactMode: true
+    customization: {
+      compactMode: true,
+    },
   });
-}()
+})()
 ```
 
 ### Start with
@@ -127,6 +131,48 @@ JS API equivalent:
 
 To display the onboarding page in the Health Check app, call `XUND.hc.init` instead of `XUND.scic.init`.
 
+### Subscribe to report shown event
+
+If you want to execute custom logic when the report is displayed, use the `onReportShown` callback. It receives the full report data.
+
+JS API equivalent (SCIC):
+
+```javascript
+(async () => {
+  const xundApp = XUND.scic.init({
+    clientId: '***',
+    webAppCode: '***',
+    authCode: '***',
+    targetContainerId: 'xundwebapp',
+
+    customization: {
+      onReportShown: ({ reportData }) => {
+        console.log('Report shown', reportData);
+      },
+    },
+  });
+})()
+```
+
+JS API equivalent (HC):
+
+```javascript
+(async () => {
+  const xundApp = XUND.hc.init({
+    clientId: '***',
+    webAppCode: '***',
+    authCode: '***',
+    targetContainerId: 'xundwebapp',
+
+    customization: {
+      onReportShown: ({ reportData }) => {
+        console.log('Report shown', reportData);
+      },
+    },
+  });
+})()
+```
+
 ### Setup a webhook passing your custom ID after each check
 
 #### Step 1: Client Hub
@@ -183,7 +229,7 @@ The following table lists all available parameters for SCIC (web-app) and HC (he
 | State | `state` | `state` | `string` | No | ✓ | ✓ |
 | Check ID | `check-id` | `checkId` | `string` | No | ✓ | ✓ |
 | Language | `app-language` | `appLanguage` | `string` | No | | ✓ |
-| Compact Mode | `compact-mode` | `compactMode` | `boolean` | No | | ✓ |
+| Compact Mode | `compact-mode` | `customization.compactMode` | `boolean` | No | | ✓ |
 | Birth Date | `birth` | `customization.birth` | `string` (YYYY-MM-DD) | No | ✓ |
 | Gender | `gender` | `customization.gender` | `string` (FEMALE/MALE) | No | ✓ | ✓ |
 | Sex | `sex` | `customization.sex` | `string` (male/female) | No | | ✓ |
@@ -195,6 +241,7 @@ The following table lists all available parameters for SCIC (web-app) and HC (he
 | Direct Check Main Symptom ID | `direct-check-main-symptom-id` | `customization.directCheckMainSymptomId` | `string` (UUID) | No | ✓ |
 | Onboarding | `onboarding` | `customization.onboarding` | `boolean` | No | ✓ | ✓ |
 | On Check Start | N/A | `customization.onCheckStart` | `function` | No | | ✓ |
+| On Report Shown | N/A | `customization.onReportShown` | `function` | No | ✓ | ✓ |
 | Check Report Action Button | N/A | `customization.checkReport.actionButton` | `object` or `boolean` | No | ✓ |
 
 ##

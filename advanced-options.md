@@ -8,6 +8,7 @@
 - [Start with](#start-with)
 - [Start symptom check with a symptom ID](#start-symptom-check-with-a-symptom-id)
 - [Add onboarding page](#add-onboarding-page)
+- [Subscribe to report shown event](#subscribe-to-report-shown-event-hc-only)
 - [Setup a webhook passing your custom ID after each check](#setup-a-webhook-passing-your-custom-id-after-each-check)
 - [Available Parameters](#available-parameters)
 
@@ -126,6 +127,29 @@ JS API equivalent:
 ```
 
 To display the onboarding page in the Health Check app, call `XUND.hc.init` instead of `XUND.scic.init`.
+=======
+### Subscribe to report shown event (HC only)
+
+If you want to execute custom logic when the health check report is displayed, use the `onReportShown` callback. It receives the full report data.
+
+JS API equivalent:
+
+```javascript
+(async () => {
+  const xundApp = XUND.hc.init({
+    clientId: '***',
+    webAppCode: '***',
+    authCode: '***',
+    targetContainerId: 'xundwebapp',
+
+    customization: {
+      onReportShown: ({ reportData }) => {
+        console.log('Report shown', reportData);
+      },
+    },
+  });
+})()
+```
 
 ### Setup a webhook passing your custom ID after each check
 
@@ -195,6 +219,7 @@ The following table lists all available parameters for SCIC (web-app) and HC (he
 | Direct Check Main Symptom ID | `direct-check-main-symptom-id` | `customization.directCheckMainSymptomId` | `string` (UUID) | No | ✓ |
 | Onboarding | `onboarding` | `customization.onboarding` | `boolean` | No | ✓ | ✓ |
 | On Check Start | N/A | `customization.onCheckStart` | `function` | No | | ✓ |
+| On Report Shown | N/A | `customization.onReportShown` | `function` | No | | ✓ |
 | Check Report Action Button | N/A | `customization.checkReport.actionButton` | `object` or `boolean` | No | ✓ |
 
 ##

@@ -31,9 +31,11 @@ JS API equivalent:
     authCode: '***',
     targetContainerId: 'xundwebapp',
 
-    // Pre-fill profile data
-    gender: 'female',
-    birth: '2000-12-31', // YYYY-MM-DD
+    customization: {
+      // Pre-fill profile data
+      gender: 'female',
+      birth: '2000-12-31', // YYYY-MM-DD
+    }
   });
 }()
 ```
@@ -78,7 +80,9 @@ JS API equivalent:
     authCode: '***',
     targetContainerId: 'xundwebapp',
 
-    directCheck: 'ILLNESS_CHECK', // or 'SYMPTOM_CHECK'
+    customization: {
+      directCheck: 'ILLNESS_CHECK', // or 'SYMPTOM_CHECK'
+    }
   });
 })()
 ```
@@ -102,8 +106,10 @@ JS API equivalent:
     authCode: '***',
     targetContainerId: 'xundwebapp',
 
-    directCheckMainSymptomId: 'YOUR-SYMPTOM-ID',
-    // Note: This implicitly sets directCheck = 'SYMPTOM_CHECK'
+    customization: {
+      directCheckMainSymptomId: 'YOUR-SYMPTOM-ID',
+      // Note: This implicitly sets directCheck = 'SYMPTOM_CHECK'
+    }
   });
 })()
 ```
@@ -124,7 +130,9 @@ JS API equivalent:
     authCode: '***',
     targetContainerId: 'xundwebapp',
 
-    onboarding: true,
+    customization: {
+      onboarding: true
+    }    
   });
 })()
 ```

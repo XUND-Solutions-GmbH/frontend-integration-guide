@@ -1,0 +1,26 @@
+# Credentials — never commit
+secrets.properties
+
+# Android / Gradle build artefacts
+.gradle/
+build/
+app/build/
+local.properties
+*.iml
+
+# Android Studio project files
+.idea/
+*.ipr
+*.iws
+captures/
+.externalNativeBuild/
+.cxx/
+
+# Keystore files
+*.jks
+*.keystore
+
+# macOS
+.DS_Store
+
+.claude

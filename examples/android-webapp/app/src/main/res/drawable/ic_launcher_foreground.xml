@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Launcher icon foreground: a single white horizontal pill, centred in the
+  safe zone. Renders cleanly at all sizes with no gradient complexity.
+  The xund_blue adaptive-icon background shows through around the pill.
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="100"
+    android:viewportHeight="100">
+
+    <!-- White pill: 70 × 28, fully rounded ends, centred at (50, 50) -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M36,36 H64 A14,14 0 0,1 64,64 H36 A14,14 0 0,1 36,36 Z" />
+
+</vector>

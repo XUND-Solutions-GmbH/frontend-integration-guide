@@ -1,0 +1,56 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
+
+// Load credentials from secrets.properties (git-ignored).
+// Falls back to empty strings so the project still syncs without the file.
+def secrets = new Properties()
+def secretsFile = rootProject.file("secrets.properties")
+if (secretsFile.exists()) {
+    secrets.load(new FileInputStream(secretsFile))
+}
+
+android {
+    namespace 'com.xund.androidwebapp'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.xund.androidwebapp"
+        minSdk 24
+        targetSdk 34
+        versionCode 1
+        versionName "1.0"
+
+        buildConfigField "String", "XUND_API_KEY",        "\"${secrets.getProperty('XUND_API_KEY', '')}\""
+        buildConfigField "String", "XUND_CLIENT_ID",      "\"${secrets.getProperty('XUND_CLIENT_ID', '')}\""
+        buildConfigField "String", "XUND_WEBAPP_CODE",    "\"${secrets.getProperty('XUND_WEBAPP_CODE', '')}\""
+        buildConfigField "String", "XUND_WEBAPP_BASE_URL","\"${secrets.getProperty('XUND_WEBAPP_BASE_URL', 'https://frame.webapp.class2.xund.solutions')}\""
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures {
+        viewBinding true
+        buildConfig true
+    }
+}
+
+dependencies {
+    implementation 'androidx.core:core-ktx:1.12.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.11.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.7.0'
+}

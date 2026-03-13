@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Android robot logo -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="72dp"
+    android:height="72dp"
+    android:viewportWidth="72"
+    android:viewportHeight="72">
+
+    <!-- Head (rounded rectangle) -->
+    <path
+        android:fillColor="#3DDC84"
+        android:pathData="M22,34 L22,52 Q22,56 26,56 L28,56 L28,63 Q28,66 31,66 Q34,66 34,63 L34,56 L38,56 L38,63 Q38,66 41,66 Q44,66 44,63 L44,56 L46,56 Q50,56 50,52 L50,34 Z" />
+
+    <!-- Antenna left -->
+    <path
+        android:fillColor="#3DDC84"
+        android:strokeColor="#3DDC84"
+        android:strokeWidth="2"
+        android:pathData="M26,33 L21,24"
+        android:strokeLineCap="round" />
+
+    <!-- Antenna right -->
+    <path
+        android:fillColor="#3DDC84"
+        android:strokeColor="#3DDC84"
+        android:strokeWidth="2"
+        android:pathData="M46,33 L51,24"
+        android:strokeLineCap="round" />
+
+    <!-- Head dome -->
+    <path
+        android:fillColor="#3DDC84"
+        android:pathData="M22,34 Q22,22 36,22 Q50,22 50,34 Z" />
+
+    <!-- Left eye -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M29,30 m-2.5,0 a2.5,2.5 0 1,0 5,0 a2.5,2.5 0 1,0 -5,0" />
+
+    <!-- Right eye -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M43,30 m-2.5,0 a2.5,2.5 0 1,0 5,0 a2.5,2.5 0 1,0 -5,0" />
+
+    <!-- Left arm -->
+    <path
+        android:fillColor="#3DDC84"
+        android:pathData="M16,34 Q12,34 12,38 L12,50 Q12,54 16,54 L20,54 L20,34 Z" />
+
+    <!-- Right arm -->
+    <path
+        android:fillColor="#3DDC84"
+        android:pathData="M56,34 Q60,34 60,38 L60,50 Q60,54 56,54 L52,54 L52,34 Z" />
+
+</vector>

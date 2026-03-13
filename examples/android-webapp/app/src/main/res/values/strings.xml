@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">XUND WebView Demo</string>
+    <string name="app_title">XUND WebView Demo</string>
+    <string name="btn_open_webview">Start Symptom Check</string>
+    <string name="btn_back">Back</string>
+    <string name="btn_get_report">Get Report</string>
+</resources>

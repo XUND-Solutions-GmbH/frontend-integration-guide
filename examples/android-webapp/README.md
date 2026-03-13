@@ -132,7 +132,7 @@ A `@JavascriptInterface` class (`XundBridge`, registered as `AndroidXund`) lets 
 | JS call | Android result |
 |---|---|
 | `AndroidXund.onReportShown(json)` | "Report Received" dialog with View / Dismiss |
-| `AndroidXund.onReportReceived(json)` | Formatted JSON dialog (scrollable, no line wrapping) |
+| `AndroidXund.onReportReceived(json)` | Formatted JSON dialog |
 | `AndroidXund.onReportNotAvailable()` | "No report yet" dialog |
 
 ---

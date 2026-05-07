@@ -4,6 +4,7 @@
 ## Advanced options
 
 ##### Table of Contents  
+- [Set language](#set-language)
 - [Add profile data](#add-profile-data)
 - [Hide logo and menu in the header](#hide-logo-and-menu-in-the-header-hc-only)
 - [Start with](#start-with)
@@ -12,6 +13,30 @@
 - [Subscribe to report shown event](#subscribe-to-report-shown-event)
 - [Setup a webhook passing your custom ID after each check](#setup-a-webhook-passing-your-custom-id-after-each-check)
 - [Available Parameters](#available-parameters)
+
+### Set language
+
+To initialize the Symptom/Illness Check in a specific language, pass the `language` parameter. When set, the language selector is hidden in the side menu. Changing the language during an active check will show a confirmation modal informing the user the check will restart.
+
+```html
+<script ... language="de" />
+```
+
+JS API equivalent:
+
+```javascript
+(async () => {
+  const xundApp = await XUND.scic.init({
+    clientId: '***',
+    webappCode: '***',
+    authCode: '***',
+    targetContainerId: 'xundwebapp',
+    language: 'de', // en | de | de-formal | fr | fr-formal | hu | it | it-formal | nl | nl-formal | pt | pt-formal
+  });
+})()
+```
+
+For Health Check, use the `appLanguage` parameter instead — see the [HC initialization example](../README.md#health-check-js-api).
 
 ### Add profile data
 
@@ -236,7 +261,8 @@ The following table lists all available parameters for SCIC (web-app) and HC (he
 | Target Container ID | N/A | `targetContainerId` | `string` | Yes (JS API) | ✓   | ✓ |
 | State | `state` | `state` | `string` | No | ✓   | ✓ |
 | Check ID | `check-id` | `checkId` | `string` | No | ✓   | ✓ |
-| Language | `app-language` | `appLanguage` | `string` | No |     | ✓ |
+| Language (SCIC) | `language` | `language` | `string` | No | ✓   |   |
+| Language (HC) | `app-language` | `appLanguage` | `string` | No |     | ✓ |
 | Compact Mode | `compact-mode` | `customization.compactMode` | `boolean` | No |✓    | ✓ |
 | Birth Date | `birth` | `customization.birth` | `string` (YYYY-MM-DD) | No | ✓   |
 | Gender | `gender` | `customization.gender` | `string` (FEMALE/MALE) | No | ✓   | ✓ |

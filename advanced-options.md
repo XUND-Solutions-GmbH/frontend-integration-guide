@@ -16,10 +16,10 @@
 
 ### Set language
 
-To initialize the Symptom/Illness Check in a specific language, pass the `language` parameter. When set, the language selector is hidden in the side menu. Changing the language during an active check will show a confirmation modal informing the user the check will restart.
+To initialize the Symptom/Illness Check in a specific language, pass the `appLanguage` parameter. When set, the language selector is hidden in the side menu. Changing the language during an active check will show a confirmation modal informing the user the check will restart.
 
 ```html
-<script ... language="de" />
+<script ... app-language="de" />
 ```
 
 JS API equivalent:
@@ -31,12 +31,10 @@ JS API equivalent:
     webappCode: '***',
     authCode: '***',
     targetContainerId: 'xundwebapp',
-    language: 'de', // en | de | de-formal | fr | fr-formal | hu | it | it-formal | nl | nl-formal | pt | pt-formal
+    appLanguage: 'de', // en | de | de-formal | fr | fr-formal | hu | it | it-formal | nl | nl-formal | pt | pt-formal
   });
 })()
 ```
-
-For Health Check, use the `appLanguage` parameter instead — see the [HC initialization example](../README.md#health-check-js-api).
 
 ### Add profile data
 
@@ -261,7 +259,7 @@ The following table lists all available parameters for SCIC (web-app) and HC (he
 | Target Container ID | N/A | `targetContainerId` | `string` | Yes (JS API) | ✓   | ✓ |
 | State | `state` | `state` | `string` | No | ✓   | ✓ |
 | Check ID | `check-id` | `checkId` | `string` | No | ✓   | ✓ |
-| Language (SCIC) | `language` | `language` | `string` | No | ✓   |   |
+| Language (SCIC) | `app-language` | `appLanguage` | `string` | No | ✓   |   |
 | Language (HC) | `app-language` | `appLanguage` | `string` | No |     | ✓ |
 | Compact Mode | `compact-mode` | `customization.compactMode` | `boolean` | No |✓    | ✓ |
 | Birth Date | `birth` | `customization.birth` | `string` (YYYY-MM-DD) | No | ✓   |

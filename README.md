@@ -25,12 +25,12 @@ Insert the following snippet into the body of your HTML page where you want to p
     client-id="***" 
     webapp-code="***"
     auth-code="***"
-    language="en"
+    app-language="en"
   ></script>
 </div>
 ```
 
-> **Note:** If the `language` parameter is passed via integration, the language selector menu will be hidden in the side menu.
+> **Note:** If the `app-language` parameter is passed via integration, the language selector menu will be hidden in the side menu.
 
 You must pass `client-id`, `webapp-code`, and `auth-code` to the script tag. Use the `client-id` and `webapp-code` from the Client Hub. The `auth-code` should be created on your server using your API Key (provided via 1Password). Complete examples are provided for PHP and .NET inside `examples/`.
 
@@ -80,7 +80,7 @@ Include the `embed.js` script and initialize via `XUND.scic.init`:
 
 #### Set language
 
-Pass `language` to initialize the app in a specific locale. The language selector will be hidden from the side menu when this parameter is set.
+Pass `appLanguage` to initialize the app in a specific locale. The language selector will be hidden from the side menu when this parameter is set.
 
 ```javascript
 (async () => {
@@ -89,7 +89,7 @@ Pass `language` to initialize the app in a specific locale. The language selecto
     webappCode: '***',
     authCode: '***',
     targetContainerId: 'xundwebapp',
-    language: 'de', // en | de | de-formal | fr | fr-formal | hu | it | it-formal | nl | nl-formal | pt | pt-formal
+    appLanguage: 'de', // en | de | de-formal | fr | fr-formal | hu | it | it-formal | nl | nl-formal | pt | pt-formal
   });
 })()
 ```

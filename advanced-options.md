@@ -212,14 +212,14 @@ First, please turn on _Enable callback URL_ option on the Client Hub [API Key](h
 
 #### Step 2: Backend
 
-When requesting the authorization code from the `/authorize` endpoint, include the `scope=state` parameter along with the `clientId`, `secretHash`, and `state`.
+When requesting the authorization code from the `/authorize` endpoint, include the `scope=state` parameter along with the `clientId`, `secretHash`, and `state`. The `state` must be an RFC 9562 UUID, for example a version 4 UUID from your language's standard library. To get your own ID back in the webhook, map the UUID to your ID on your server.
 
 #### Step3: Frontend
 
 Then extend the script's properties with `state`:
 
 ```html
-<script ... state="YOUR-CUSTOM-ID" />
+<script ... state="3f1c9a52-7b4e-4d2a-9c61-0e8b5f7a2d34" />
 ```
 
 JS API equivalent:
@@ -232,7 +232,7 @@ JS API equivalent:
     authCode: '***',
     targetContainerId: 'xundwebapp',
 
-    state: 'YOUR-CUSTOM-ID',
+    state: '3f1c9a52-7b4e-4d2a-9c61-0e8b5f7a2d34',
   });
 })()
 ```
@@ -242,7 +242,7 @@ JS API equivalent:
 On your defined endpoint you'll receive a message like this: 
 
 ```json
-{"checkId":"***", "state":"YOUR-CUSTOM-ID"}
+{"checkId":"***", "state":"3f1c9a52-7b4e-4d2a-9c61-0e8b5f7a2d34"}
 ```
 
 ### Available Parameters
@@ -257,7 +257,7 @@ The following table lists all available parameters for SCIC (web-app) and HC (he
 | Auth Base URL | `auth-base-url` | `authBaseUrl` | `string` | No | ✓   | ✓ |
 | Auth Code | `auth-code` | `authCode` | `string` | No | ✓   | ✓ |
 | Target Container ID | N/A | `targetContainerId` | `string` | Yes (JS API) | ✓   | ✓ |
-| State | `state` | `state` | `string` | No | ✓   | ✓ |
+| State | `state` | `state` | `string` (UUID) | No | ✓   | ✓ |
 | Check ID | `check-id` | `checkId` | `string` | No | ✓   | ✓ |
 | Language (SCIC) | `app-language` | `appLanguage` | `string` | No | ✓   |   |
 | Language (HC) | `app-language` | `appLanguage` | `string` | No |     | ✓ |

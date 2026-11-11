@@ -5,8 +5,11 @@ function authorize($clientId, $authBaseUrl) {
     // generate hashed api key
     $hashedApiKey = hash('sha256', $apiKey);
     
-    // generate uuid as a state
-    $stateUuid = vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex(random_bytes(16)), 4));
+    // generate a version 4 uuid (RFC 9562) as a state
+    $bytes = random_bytes(16);
+    $bytes[6] = chr((ord($bytes[6]) & 0x0f) | 0x40); // version 4
+    $bytes[8] = chr((ord($bytes[8]) & 0x3f) | 0x80); // RFC 9562 variant
+    $stateUuid = vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($bytes), 4));
 
     // hash state with client id with api key as a secret
     $secretHash = hash_hmac('sha256',"$stateUuid$clientId" ,$hashedApiKey);

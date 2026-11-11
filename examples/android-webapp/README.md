@@ -84,7 +84,7 @@ Mobile app  ◀── { authCode } ──────────┘
 `XundAuthHelper.getAuthCode()` runs the full signing logic inside the app, mirroring the [PHP reference implementation](https://github.com/XUND-Solutions-GmbH/frontend-integration-guide/blob/main/examples/php/src/index.php):
 
 1. SHA-256 hash the API key
-2. Generate a UUID as the `state` parameter
+2. Generate a UUID as the `state` parameter. The state must be an RFC 9562 UUID, for example a version 4 UUID from the language's standard library.
 3. HMAC-SHA-256(`state + clientId`, hashedApiKey) → `secretHash`
 4. `GET /authorize?clientId=&secretHash=&state=` → `authCode`
 

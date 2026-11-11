@@ -6,6 +6,10 @@ function authorize($clientId, $authBaseUrl) {
     $hashedApiKey = hash('sha256', $apiKey);
     
     // generate a version 4 uuid (RFC 9562) as a state
+    // In your own code, use a UUID library instead of the hand-written lines below,
+    // for example ramsey/uuid (composer require ramsey/uuid):
+    //   $stateUuid = \Ramsey\Uuid\Uuid::uuid4()->toString();
+    // This example has no Composer setup, so it builds the same kind of UUID by hand.
     $bytes = random_bytes(16);
     $bytes[6] = chr((ord($bytes[6]) & 0x0f) | 0x40); // version 4
     $bytes[8] = chr((ord($bytes[8]) & 0x3f) | 0x80); // RFC 9562 variant
